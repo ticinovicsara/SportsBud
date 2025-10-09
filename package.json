@@ -1,5 +1,5 @@
 {
-  "name": "SportsBud",
+  "name": "sportsbud",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -9,7 +9,6 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
-    "live-server": "^1.2.2",
     "prettier": "^3.6.2",
     "turbo": "^2.5.8",
     "typescript": "5.9.2"
