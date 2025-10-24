@@ -28,7 +28,7 @@ export default function AppRoutes() {
         }
       />
       <Route
-        path="/profile"
+        path="/profile/:id"
         element={
           //<ProtectedRoute>
           <ProfilePage />
