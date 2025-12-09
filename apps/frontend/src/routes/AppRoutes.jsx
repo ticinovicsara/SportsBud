@@ -9,6 +9,7 @@ import {
   NotFoundPage,
 } from '../pages/index.js';
 import { useUser } from '../context/UserContext.jsx';
+import { Navbar } from '../components/index.js';
 //import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.jsx';
 
 export default function AppRoutes() {
