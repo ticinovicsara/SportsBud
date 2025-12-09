@@ -22,7 +22,7 @@ export default function AppRoutes() {
         <Route path="/register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
       </Route>
 
-      {/* add later <ProtectedRoute> <MainLayout /> </ProtectedRoute>{' '}*/}
+      {/* add for later <ProtectedRoute> <MainLayout /> </ProtectedRoute>{' '}*/}
 
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
