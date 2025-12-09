@@ -1,0 +1,50 @@
+.navbar-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--font-color-gray);
+}
+
+.navbar-items {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 4em;
+  padding: 10px;
+}
+
+.navbar-items::before {
+  content: '';
+  position: absolute;
+  top: -2em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 98%;
+  height: 0.5px;
+  background-color: var(--font-color-gray);
+}
+
+.navbar-item {
+  flex: 1;
+  height: 100%;
+  text-align: center;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.navbar-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navbar-icon {
+  scale: 2;
+}
+
+.active .navbar-icon {
+  color: var(--color-primary-green);
+}
