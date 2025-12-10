@@ -9,6 +9,7 @@ import {
   NotFoundPage,
 } from '../pages/index.js';
 import { useUser } from '../context/UserContext.jsx';
+import { MainLayout, AuthLayout } from '../layouts/index.js';
 //import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.jsx';
 
 export default function AppRoutes() {
@@ -16,43 +17,20 @@ export default function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
-      <Route path="/register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
+        <Route path="/register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
+      </Route>
 
-      <Route
-        path="/"
-        element={
-          //<ProtectedRoute>
-          <HomePage />
-          //</ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profile/:id"
-        element={
-          //<ProtectedRoute>
-          <ProfilePage />
-          //</ProtectedRoute>
-        }
-      />
-      <Route
-        path="/create-event"
-        element={
-          //<ProtectedRoute>
-          <CreateEventPage />
-          //</ProtectedRoute>
-        }
-      />
-      <Route
-        path="/event/:id"
-        element={
-          //<ProtectedRoute>
-          <EventDetailsPage />
-          //</ProtectedRoute>
-        }
-      />
+      {/* add for later <ProtectedRoute> <MainLayout /> </ProtectedRoute>{' '}*/}
 
-      <Route path="*" element={<NotFoundPage />} />
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/create-event" element={<CreateEventPage />} />
+        <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="/event/:id" element={<EventDetailsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
     </Routes>
   );
 }
