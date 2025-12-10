@@ -1,0 +1,199 @@
+.create-event-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  padding-bottom: 100px; /* Prostor za sticky gumb ako ti treba */
+}
+
+.event-container {
+  max-width: 550px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.event-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.tags-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hash-icon {
+  color: #10b981;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.form-input,
+.form-select {
+  padding: 14px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 50px;
+  background-color: #e8e8e8;
+  color: #1a1a1a;
+  outline: none;
+  transition: background-color 0.2s;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder {
+  color: #a0a0a0;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231a1a1a' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 50px;
+  cursor: pointer;
+}
+
+.form-input:focus,
+.form-select:focus {
+  background-color: #d8d8d8;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 20px;
+  background-color: #e8e8e8;
+  border-radius: 50px;
+}
+
+.counter-btn {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #c0c0c0;
+  background-color: transparent;
+  color: #666;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.counter-btn:hover {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.counter-btn:active {
+  transform: scale(0.95);
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  min-width: 40px;
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 18px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0ea270;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #10b981;
+  border: 2px solid #10b981;
+}
+
+.btn-secondary:hover {
+  background-color: #f0fdf9;
+}
+
+.btn-secondary:active {
+  background-color: #e0f5f0;
+}
+
+@media (max-width: 600px) {
+  .create-event-page {
+    padding: 10px;
+  }
+  
+  .event-container {
+    padding: 20px;
+  }
+  
+  .event-title {
+    font-size: 24px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+}
