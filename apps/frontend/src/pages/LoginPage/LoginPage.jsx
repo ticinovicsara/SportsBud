@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
-import styles from './loginPage.module.css';
-import loginImage from '../../assets';
 import { InputField, SubmitButton } from '../../components';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 import { USERS } from '../../data';
 import { toast } from 'react-toastify';
+import loginImage from '../../assets';
+import styles from './loginPage.module.css';
 
 function LoginPage() {
   const { login } = useUser();
