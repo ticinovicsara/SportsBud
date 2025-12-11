@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import {SPORTS} from '../../data/sports'
+import { SPORTS } from '../../data/sports';
 import "./createEventPage.css";
 
 function CreateEventPage() {
-
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     sportType: '',
     date: '',
     startTime: '10:00 AM',
@@ -12,7 +11,8 @@ function CreateEventPage() {
     location: '',
     participants: 4,
     points: 10,
-    tags: ''
+    tags: '',
+    description: ''
   });
 
   const handleInputChange = (e) => {
@@ -32,13 +32,49 @@ function CreateEventPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Event created! Check console for data.');
-  };
+    
+    // Kreiraj novi event objekt
+    const newEvent = {
+      id: Date.now(), // Jednostavan ID baziran na vremenu
+      title: formData.tags || 'Novi event', // Koristim tags kao title, možeš dodati posebno polje
+      sport: SPORTS.find(s => s.id === parseInt(formData.sportType)),
+      creatorId: 1, // Placeholder - trebat će ti pravi user ID
+      location: {
+        name: formData.location,
+        address: formData.location,
+        lat: 0, // Dodaj koordinate ako imaš
+        lng: 0,
+      },
+      date: formData.date,
+      time: formData.startTime,
+      duration: 90, // Možeš izračunati iz startTime i endTime
+      maxPlayers: formData.participants,
+      currentPlayers: 1, // Creator je prvi participant
+      participants: [
+        { userId: 1, status: 'confirmed' }
+      ],
+      description: formData.description || 'No description provided',
+      requiredLevel: 'intermediate',
+      isPublic: true,
+      createdAt: new Date().toISOString(),
+      status: 'upcoming',
+      points: formData.points,
+    };
 
-  const handleCancel = () => {
-    console.log('Cancelled');
-      setFormData({
+    // Dohvati postojeće evente iz localStorage
+    const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
+    
+    // Dodaj novi event
+    existingEvents.push(newEvent);
+    
+    // Spremi natrag u localStorage
+    localStorage.setItem('events', JSON.stringify(existingEvents));
+    
+    console.log('Event saved:', newEvent);
+    alert('Event successfully created! Check console for details.');
+    
+    // Reset forme
+    setFormData({
       sportType: '',
       date: '',
       startTime: '10:00 AM',
@@ -46,12 +82,28 @@ function CreateEventPage() {
       location: '',
       participants: 4,
       points: 10,
-      tags: ''
+      tags: '',
+      description: ''
+    });
+  };
+
+  const handleCancel = () => {
+    console.log('Cancelled');
+    setFormData({
+      sportType: '',
+      date: '',
+      startTime: '10:00 AM',
+      endTime: '12:00 PM',
+      location: '',
+      participants: 4,
+      points: 10,
+      tags: '',
+      description: ''
     });
   };
 
   return (
-     <div className="create-event-page">
+    <div className="create-event-page">
       <div className="event-container">
         <h1 className="event-title">Create New Event</h1>
 
@@ -64,7 +116,7 @@ function CreateEventPage() {
               value={formData.sportType}
               onChange={handleInputChange}
             >
-              <option value="">Choose sport</option>
+              <option value="">Odaberi sport</option>
               {SPORTS.map(sport => (
                 <option key={sport.id} value={sport.id}>
                   {sport.icon} {sport.name}
@@ -176,6 +228,18 @@ function CreateEventPage() {
               name="tags"
               value={formData.tags}
               onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Description</label>
+            <textarea 
+              className="form-textarea" 
+              placeholder="Enter event description"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              rows="4"
             />
           </div>
 

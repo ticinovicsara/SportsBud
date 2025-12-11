@@ -1,24 +1,27 @@
+* {
+  box-sizing: border-box; /* FIX: sprječava padding overflow */
+}
+
 .create-event-page {
   min-height: 100vh;
   background-color: #f5f5f5;
-  padding: 20px;
-  padding-bottom: 100px; /* Prostor za sticky gumb ako ti treba */
+  padding: 80px 20px 120px 20px;
+  width: 100%;
 }
 
 .event-container {
-  max-width: 550px;
+  width: 100%;
   margin: 0 auto;
   background-color: #ffffff;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
 }
 
 .event-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #171717;
   margin-bottom: 30px;
 }
 
@@ -26,19 +29,20 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  width: 100%;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
+  width: 100%;
 }
 
 .form-label {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #171717;
 }
 
 .tags-label {
@@ -48,33 +52,41 @@
 }
 
 .hash-icon {
-  color: #10b981;
+  color: #00a55a;
   font-size: 20px;
   font-weight: 700;
 }
 
 .form-input,
-.form-select {
-  padding: 14px 16px;
+.form-select,
+.form-textarea {
+  padding: 14px 20px;
   font-size: 15px;
   border: none;
   border-radius: 50px;
   background-color: #e8e8e8;
-  color: #1a1a1a;
+  color: #171717;
   outline: none;
   transition: background-color 0.2s;
   width: 100%;
-  max-width: 100%;
   box-sizing: border-box;
 }
 
-.form-input::placeholder {
-  color: #a0a0a0;
+.form-textarea {
+  border-radius: 20px;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #525252;
 }
 
 .form-select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231a1a1a' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23171717' d='M1.41 0L6 4.59L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 20px center;
   padding-right: 50px;
@@ -82,13 +94,20 @@
 }
 
 .form-input:focus,
-.form-select:focus {
+.form-select:focus,
+.form-textarea:focus {
   background-color: #d8d8d8;
 }
 
 .form-row {
   display: flex;
   gap: 16px;
+  width: 100%;
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 0;
 }
 
 .counter {
@@ -99,14 +118,16 @@
   padding: 12px 20px;
   background-color: #e8e8e8;
   border-radius: 50px;
+  width: 100%;
 }
 
 .counter-btn {
   width: 36px;
   height: 36px;
-  border: 2px solid #c0c0c0;
+  min-width: 36px;
+  border: 2px solid #525252;
   background-color: transparent;
-  color: #666;
+  color: #525252;
   font-size: 20px;
   border-radius: 50%;
   cursor: pointer;
@@ -114,11 +135,12 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .counter-btn:hover {
-  border-color: #10b981;
-  color: #10b981;
+  border-color: #00a55a;
+  color: #00a55a;
 }
 
 .counter-btn:active {
@@ -128,9 +150,10 @@
 .counter-value {
   font-size: 24px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #171717;
   min-width: 40px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .button-group {
@@ -138,6 +161,7 @@
   flex-direction: column;
   gap: 12px;
   margin-top: 20px;
+  width: 100%;
 }
 
 .btn {
@@ -152,14 +176,14 @@
 }
 
 .btn-primary {
-  background-color: #10b981;
+  background-color: #00a55a;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #0ea270;
+  background-color: #008a4d;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 165, 90, 0.3);
 }
 
 .btn-primary:active {
@@ -168,32 +192,94 @@
 
 .btn-secondary {
   background-color: transparent;
-  color: #10b981;
-  border: 2px solid #10b981;
+  color: #00a55a;
+  border: 2px solid #00a55a;
 }
 
 .btn-secondary:hover {
-  background-color: #f0fdf9;
+  background-color: rgba(0, 165, 90, 0.05);
 }
 
 .btn-secondary:active {
-  background-color: #e0f5f0;
+  background-color: rgba(0, 165, 90, 0.1);
+}
+
+@media (max-width: 768px) {
+  .event-container {
+    padding: 25px;
+  }
+  
+  .event-title {
+    font-size: 26px;
+  }
 }
 
 @media (max-width: 600px) {
   .create-event-page {
-    padding: 10px;
+    padding: 15px 15px 120px 15px;
   }
   
   .event-container {
     padding: 20px;
+    border-radius: 8px;
   }
   
   .event-title {
     font-size: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .event-form {
+    gap: 20px;
   }
   
   .form-row {
     flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+  
+  .counter {
+    padding: 10px 16px;
+    gap: 16px;
+  }
+  
+  .counter-value {
+    font-size: 22px;
+  }
+  
+  .btn {
+    padding: 16px 24px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .create-event-page {
+    padding: 10px 10px 120px 10px;
+  }
+  
+  .event-container {
+    padding: 16px;
+  }
+  
+  .event-title {
+    font-size: 22px;
+  }
+  
+  .counter {
+    gap: 12px;
+  }
+  
+  .counter-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
   }
 }
