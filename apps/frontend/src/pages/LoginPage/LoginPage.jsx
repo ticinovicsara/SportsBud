@@ -1,8 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
-import { InputField, SubmitButton } from '../../components';
+import { InputField, SubmitButton, SecondaryHeader } from '../../components';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useForm } from '../../hooks/useForm';
 import { useUser } from '../../context/UserContext';
 import { USERS } from '../../data';
 import { toast } from 'react-toastify';
@@ -12,15 +10,10 @@ import styles from './loginPage.module.css';
 function LoginPage() {
   const { login } = useUser();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const { formData, handleChange } = useForm({
     emailOrUsername: '',
     password: '',
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -48,10 +41,7 @@ function LoginPage() {
 
   return (
     <div className={styles['login-page']}>
-      <div className={styles['login-header']}>
-        <FontAwesomeIcon icon={faPersonRunning} className={styles['login-header-icon']} />
-        <h1>SportsBud</h1>
-      </div>
+      <SecondaryHeader />
 
       <div className={styles['login-image-container']}>
         <img src={loginImage} alt="Login" className={styles['login-image']} />
