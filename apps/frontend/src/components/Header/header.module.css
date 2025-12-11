@@ -7,6 +7,9 @@ header {
   padding: 5px 20px;
   color: white;
   position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .header-icon {
