@@ -1,12 +1,13 @@
 import styles from './sportLevelSelector.module.css';
 import { SPORTS, EXPERIENCE_LEVELS } from '../../data';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faX } from '@fortawesome/free-solid-svg-icons';
 
 export default function SportLevelSelector({ sports, onChange }) {
   function handleSportFieldChange(index, field, value) {
     const updated = [...sports];
     updated[index][field] = value;
 
-    // auto-set sportName if needed
     if (field === 'sportId') {
       const sport = SPORTS.find((s) => s.id === parseInt(value));
       updated[index].sportName = sport ? sport.name : '';
@@ -30,7 +31,6 @@ export default function SportLevelSelector({ sports, onChange }) {
 
       {sports.map((sport, index) => (
         <div key={index} className={styles.row}>
-          {/* Sport select */}
           <select
             value={sport.sportId}
             onChange={(e) => handleSportFieldChange(index, 'sportId', e.target.value)}
@@ -43,7 +43,6 @@ export default function SportLevelSelector({ sports, onChange }) {
             ))}
           </select>
 
-          {/* Level select */}
           <select
             value={sport.level}
             onChange={(e) => handleSportFieldChange(index, 'level', e.target.value)}
@@ -56,14 +55,15 @@ export default function SportLevelSelector({ sports, onChange }) {
             ))}
           </select>
 
-          <button type="button" onClick={() => removeSport(index)}>
-            ❌
+          <button type="button" onClick={() => removeSport(index)} className={styles.removeBtn}>
+            <FontAwesomeIcon icon={faX} />
           </button>
         </div>
       ))}
 
       <button type="button" onClick={addSport} className={styles.addBtn}>
-        ➕ Add Sport
+        <FontAwesomeIcon icon={faPlus} />
+        <p>Add Sport</p>
       </button>
     </div>
   );

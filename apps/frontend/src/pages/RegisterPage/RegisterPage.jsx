@@ -10,6 +10,7 @@ import {
   SportLevelSelector,
   SubmitButton,
 } from '../../components';
+import { validateRegisterForm } from '../../utils';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -27,16 +28,10 @@ function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { firstName, lastName, username, email, password, gender, birthYear } = formData;
 
-    if (!firstName || !lastName || !username || !email || !password || !gender || !birthYear) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-
-    const existingUser = USERS.find((u) => u.username === username || u.email === email);
-    if (existingUser) {
-      toast.error('Username or email already taken');
+    const result = validateRegisterForm(formData);
+    if (!result.valid) {
+      toast.error(result.message);
       return;
     }
 
@@ -50,37 +45,41 @@ function RegisterPage() {
     USERS.push(newUser);
 
     toast.success(`Welcome to SportsBud, ${newUser.firstName}!`);
-    navigate('/login');
+    navigate('/');
   };
 
   return (
     <div className={styles['register-page']}>
       <SecondaryHeader />
 
-      <h1>Register</h1>
+      <h1 className={styles['register-header']}>Register Form</h1>
       <form onSubmit={handleSubmit} className={styles['login-form']}>
         <InputField
           label="First Name"
           name="firstName"
           value={formData.firstName}
+          placeholder="Enter your first name"
           onChange={handleChange}
         />
         <InputField
           label="Last Name"
           name="lastName"
           value={formData.lastName}
+          placeholder="Enter your last name"
           onChange={handleChange}
         />
         <InputField
           label="Username"
           name="username"
           value={formData.username}
+          placeholder="Choose a username"
           onChange={handleChange}
         />
         <InputField
           label="Email"
           name="email"
           value={formData.email}
+          placeholder="Enter your email"
           onChange={handleChange}
           type="email"
         />
@@ -88,6 +87,7 @@ function RegisterPage() {
           label="Password"
           name="password"
           value={formData.password}
+          placeholder="Create a password"
           onChange={handleChange}
           type="password"
         />
@@ -117,6 +117,7 @@ function RegisterPage() {
           label="Location (optional)"
           name="location"
           value={formData.location}
+          placeholder="Enter your location"
           onChange={handleChange}
         />
 
