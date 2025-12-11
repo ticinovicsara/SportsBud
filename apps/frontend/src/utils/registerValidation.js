@@ -21,15 +21,18 @@ export const validateRegisterForm = (formData) => {
     return { valid: false, message: 'Username or email already taken' };
   }
 
-  if (!sports.length) {
-    return { valid: false, message: 'Please select at least one sport' };
-  }
   for (let i = 0; i < sports.length; i++) {
     const s = sports[i];
-    if (!s.sportId || !s.level) {
+    if (s.sportId && !s.level) {
       return {
         valid: false,
-        message: `Please select both sport and level for all sports (Sport #${i + 1})`,
+        message: `Please select a level for all selected sports (Sport #${i + 1})`,
+      };
+    }
+    if (!s.sportId && s.level) {
+      return {
+        valid: false,
+        message: `Please select a sport for all specified levels (Sport #${i + 1})`,
       };
     }
   }
