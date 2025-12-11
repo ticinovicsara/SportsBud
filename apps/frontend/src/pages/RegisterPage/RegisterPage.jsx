@@ -11,9 +11,11 @@ import {
   SubmitButton,
 } from '../../components';
 import { validateRegisterForm } from '../../utils';
+import { useUser } from '../../context/UserContext';
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const { login } = useUser();
   const { formData, setFormData, handleChange } = useForm({
     firstName: '',
     lastName: '',
@@ -45,6 +47,7 @@ function RegisterPage() {
     USERS.push(newUser);
 
     toast.success(`Welcome to SportsBud, ${newUser.firstName}!`);
+    login(newUser);
     navigate('/');
   };
 
