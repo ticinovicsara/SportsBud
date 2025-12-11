@@ -42,7 +42,7 @@ function LoginPage() {
       toast.success(`Welcome back, ${user.firstName}!`);
       navigate('/');
     } else {
-      toast.error('Invalid credentials. Please try again.');
+      toast.error('Invalid credentials, please try again!');
     }
   };
 
