@@ -20,7 +20,9 @@ Environment Variables
 
 Create a .env file in the project root and add the following:
 
-    ``` PostgreSQL database URL  DATABASE_URL="postgresql://:@localhost:5432/ ```
+```console
+PostgreSQL database URL  DATABASE_URL="postgresql://:@localhost:5432/
+```
 
 Replace , , and with your local PostgreSQL credentials.
 
@@ -29,22 +31,30 @@ Running the Project Locally
 
 1.  **Install Node.js using NVM:**
 
-    ``` nvm install --lts  nvm use --lts  node -v    # check Node.js version  npm -v     # check npm version   ``` 
+```console
+nvm install --lts  nvm use --lts  node -v    # check Node.js version  npm -v     # check npm version
+``` 
 
 
 2.  **Clone the repository:**
 
-    ``` git clone https://github.com/ticinovicsara/SportsBud.git  cd SportsBud   ``` 
+```console
+git clone https://github.com/ticinovicsara/SportsBud.git  cd SportsBud
+``` 
 
 
 3.  **Install dependencies:**
 
-    ``` npm install   ``` 
+```console
+npm install
+``` 
 
 
 4.  **Run the project:**
     
-    ``` turbo run dev   ``` 
+```console
+turbo run dev
+``` 
 
 
 This will start **frontend** and **backend** simultaneously.
