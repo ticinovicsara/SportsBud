@@ -4,7 +4,7 @@
 
   --font-base: 'Roboto', sans-serif;
   --font-color-black: #171717;
-  --font-color-gray: #525252;
+  --font-color-gray: #525252c9;
 }
 
 body,
@@ -18,4 +18,5 @@ input,
 select,
 textarea {
   font-family: var(--font-base);
+  color: var(--font-color-black);
 }
