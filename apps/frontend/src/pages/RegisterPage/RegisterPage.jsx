@@ -10,6 +10,7 @@ import {
   SportLevelSelector,
   SubmitButton,
 } from '../../components';
+
 function RegisterPage() {
   const navigate = useNavigate();
   const { formData, setFormData, handleChange } = useForm({

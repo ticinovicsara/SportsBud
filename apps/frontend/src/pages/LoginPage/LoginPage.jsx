@@ -43,11 +43,13 @@ function LoginPage() {
     <div className={styles['login-page']}>
       <SecondaryHeader />
 
-      <div className={styles['login-image-container']}>
-        <img src={loginImage} alt="Login" className={styles['login-image']} />
+      <div className={styles['container']}>
+        <div className={styles['login-image-container']}>
+          <img src={loginImage} alt="Login" className={styles['login-image']} />
+        </div>
+        <h1 className={styles['login-title']}>Welcome to SportsBud</h1>
+        <h4 className={styles['login-subtitle']}>Find your perfect workout partner today!</h4>
       </div>
-      <h1 className={styles['login-title']}>Welcome to SportsBud</h1>
-      <h4 className={styles['login-subtitle']}>Find your perfect workout partner today!</h4>
 
       <form className={styles['login-form']} onSubmit={handleLogin}>
         <InputField
