@@ -1,6 +1,14 @@
 import styles from './inputField.module.css';
 
-function InputField({ label, type = 'text', value, onChange, placeholder, name }) {
+function InputField({
+  label,
+  type = 'text',
+  value,
+  onChange,
+  placeholder,
+  name,
+  readOnly = false,
+}) {
   return (
     <div className={styles.container}>
       {label && <label className={styles.label}>{label}</label>}
@@ -11,6 +19,7 @@ function InputField({ label, type = 'text', value, onChange, placeholder, name }
         onChange={onChange}
         placeholder={placeholder}
         className={styles.input}
+        readOnly={readOnly}
       />
     </div>
   );
