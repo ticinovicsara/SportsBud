@@ -3,13 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPeopleGroup, faTag } from '@fortawesome/free-solid-svg-icons';
 
 const EventDescriptionCard = ({ event }) => {
+  if (!event) return null;
+
   return (
     <div className={styles['event-description-card']}>
       <h2>Event description</h2>
       <p className={styles['description']}>{event.description}</p>
       <div className={styles['additional-content']}>
         <FontAwesomeIcon icon={faPeopleGroup} className={styles['icon']} />
-        <p>8/12 participans</p>
+        <p>
+          {event.currentPlayers} / {event.maxPlayers}
+        </p>
       </div>
 
       <div className={styles['additional-content']}>

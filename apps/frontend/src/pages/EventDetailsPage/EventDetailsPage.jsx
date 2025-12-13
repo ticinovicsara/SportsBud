@@ -31,7 +31,6 @@ function EventDetailsPage() {
 
   return (
     <div className={styles['event-details-page']}>
-      <img src={sportsImage} alt={event.title} className={styles['header-image']} />
       <div className={styles['content-header']}>
         <EventInfo event={event} />
 
