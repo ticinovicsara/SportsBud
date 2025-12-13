@@ -7,13 +7,19 @@ import {
   EventInfo,
   EventOrganizerCard,
   EventParticipantsCard,
+  SubmitButton,
 } from '../../components';
+import { toast } from 'react-toastify';
 
 function EventDetailsPage() {
   const { id } = useParams();
   const event = getEventById(Number(id));
 
   if (!event) return <p>Event nije pronadjen.</p>;
+
+  function handleJoinEvent() {
+    toast.success('You have successfully joined the event!');
+  }
 
   return (
     <div className={styles['event-details-page']}>
@@ -27,6 +33,9 @@ function EventDetailsPage() {
 
         <EventParticipantsCard participants={event.participants} maxPlayers={event.maxPlayers} />
       </div>
+      <SubmitButton variant="primary" onClick={handleJoinEvent}>
+        Join Event
+      </SubmitButton>
     </div>
   );
 }

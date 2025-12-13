@@ -1,7 +1,7 @@
 .event-details-page {
   width: 100%;
   box-sizing: border-box;
-  padding: 1em;
+  padding: 1.5em;
 }
 
 .header-image {
@@ -15,4 +15,5 @@
   align-items: center;
   gap: 0.5em;
   width: 100%;
+  margin-bottom: 2em;
 }

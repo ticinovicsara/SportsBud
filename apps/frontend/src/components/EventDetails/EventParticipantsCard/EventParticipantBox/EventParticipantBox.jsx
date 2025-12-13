@@ -3,7 +3,6 @@ import styles from './eventParticipantBox.module.css';
 
 const EventParticipantBox = ({ participantId }) => {
   const participantData = getUserById(participantId);
-  console.log(participantData);
 
   if (!participantData) return <p>Participant not found.</p>;
 
