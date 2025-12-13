@@ -10,15 +10,23 @@ import {
   SubmitButton,
 } from '../../components';
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 function EventDetailsPage() {
   const { id } = useParams();
   const event = getEventById(Number(id));
+  const [isJoined, setIsJoined] = useState(false);
 
   if (!event) return <p>Event nije pronadjen.</p>;
 
   function handleJoinEvent() {
-    toast.success('You have successfully joined the event!');
+    if (!isJoined) {
+      toast.success('You have successfully joined the event!');
+    } else {
+      toast.info('You have canceled your attendance.');
+    }
+
+    setIsJoined(!isJoined);
   }
 
   return (
@@ -33,8 +41,9 @@ function EventDetailsPage() {
 
         <EventParticipantsCard participants={event.participants} maxPlayers={event.maxPlayers} />
       </div>
-      <SubmitButton variant="primary" onClick={handleJoinEvent}>
-        Join Event
+
+      <SubmitButton variant={isJoined ? 'cancel-event' : 'primary'} onClick={handleJoinEvent}>
+        {isJoined ? 'Cancel Event' : 'Join Event'}
       </SubmitButton>
     </div>
   );
