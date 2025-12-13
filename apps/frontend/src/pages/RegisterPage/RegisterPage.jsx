@@ -56,7 +56,7 @@ function RegisterPage() {
       <SecondaryHeader />
 
       <h1 className={styles['register-header']}>Register Form</h1>
-      <form onSubmit={handleSubmit} className={styles['login-form']}>
+      <form onSubmit={handleSubmit} className={styles['register-form']}>
         <InputField
           label="First Name"
           name="firstName"
@@ -129,9 +129,15 @@ function RegisterPage() {
           onChange={(updated) => setFormData({ ...formData, sports: updated })}
         />
 
-        <SubmitButton type="submit" variant="primary">
-          Register
-        </SubmitButton>
+        <div className={styles['register-buttons-container']}>
+          <SubmitButton type="submit" variant="primary">
+            Register
+          </SubmitButton>
+
+          <SubmitButton variant="secondary" onClick={() => navigate('/login')}>
+            Back to Login
+          </SubmitButton>
+        </div>
       </form>
     </div>
   );
