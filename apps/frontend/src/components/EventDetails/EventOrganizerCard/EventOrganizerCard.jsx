@@ -12,9 +12,9 @@ const EventOrganizerCard = ({ organizerId }) => {
       <h2>Organizer</h2>
       <div className={styles['profile-container']}>
         <div className={styles['profile-details']}>
-          <div className="profile pic">
+          <div className={styles['profile-pic']}>
             <img
-              src={organizer.profilePicture}
+              src={organizer.profileImage}
               alt={`${organizer.firstName} ${organizer.lastName}`}
             />
           </div>
