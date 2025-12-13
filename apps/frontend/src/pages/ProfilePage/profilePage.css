@@ -91,7 +91,7 @@
   .input-group textarea {
     width: 100%;
     padding: 12px;
-    border-radius: 16px;
+    border-radius: 20px;
     border: 1px solid #e5e7eb;
     background-color: #f3f4f6;
   }
@@ -109,7 +109,7 @@
     background-color: #22c55e;
     color: white;
     padding: 8px 16px;
-    border-radius: 16px;
+    border-radius: 20px;
     font-weight: 600;
     cursor: pointer;
   }

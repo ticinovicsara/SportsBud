@@ -1,7 +1,7 @@
 import './profilePage.css';
 import React from 'react';
 import {useParams} from 'react-router-dom';
-import {getUserById} from '../../data/users';
+import {getUserById} from '../../data/dataHelper';
 
 function ProfileScreen({user}){
   if(!user) return <p className="no-user">Korisnik nije pronađen!</p>;
