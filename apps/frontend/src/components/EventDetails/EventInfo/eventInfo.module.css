@@ -1,0 +1,16 @@
+.event-info {
+  width: 100%;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.common-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--font-color-gray);
+}
+
+.info-icon {
+  color: var(--color-primary-green);
+}

@@ -14,20 +14,5 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5em;
-}
-
-.event-info {
   width: 100%;
-  text-align: left;
-}
-
-.common-info {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  color: var(--font-color-gray);
-}
-
-.info-icon {
-  color: var(--color-primary-green);
 }
