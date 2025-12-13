@@ -1,0 +1,16 @@
+.event-participants-card {
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--font-color-gray);
+  border-radius: 20px;
+  margin-top: 1em;
+}
+
+.participants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5em;
+}
