@@ -1,0 +1,13 @@
+.secondary-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-green);
+  margin-bottom: 3em;
+  scale: 1.2;
+}
+
+.secondary-header-icon {
+  scale: 2;
+  margin-right: 1em;
+}

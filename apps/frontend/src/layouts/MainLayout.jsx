@@ -1,13 +1,14 @@
-import { Navbar } from '../components';
+import { Header, Navbar } from '../components';
 import { Outlet } from 'react-router-dom';
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   return (
     <>
-      <Navbar />
+      <Header />
       <main>
         <Outlet />
       </main>
+      <Navbar />
     </>
   );
 };
