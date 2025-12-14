@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SPORTS } from '../../data/sports';
 import "./createEventPage.css";
 
+//dodala komentar da mogu commitat jer san ovo vec commitala
 function CreateEventPage() {
   const [formData, setFormData] = useState({
     sportType: '',
