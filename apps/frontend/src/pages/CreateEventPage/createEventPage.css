@@ -1,12 +1,9 @@
-* {
-  box-sizing: border-box; /* FIX: sprječava padding overflow */
-}
-
 .create-event-page {
   min-height: 100vh;
   background-color: #f5f5f5;
   padding: 80px 20px 120px 20px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .event-container {
@@ -16,6 +13,7 @@
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .event-title {
@@ -113,12 +111,13 @@
 .counter {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 12px 20px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
   background-color: #e8e8e8;
   border-radius: 50px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .counter-btn {

@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { SPORTS } from '../../data/sports';
+import { USERS } from '../../data/users';
+import { toast } from 'react-toastify';
 import "./createEventPage.css";
 
-//dodala komentar da mogu commitat jer san ovo vec commitala
 function CreateEventPage() {
+  //const {user} = useUser();
+  
+  // TEMPORARY: Za testiranje
+  const user = { id: 1, name: 'Test User' };
+
   const [formData, setFormData] = useState({
+    eventTitle: '',
+    imageUrl: '',
     sportType: '',
     date: '',
     startTime: '10:00 AM',
@@ -34,48 +42,49 @@ function CreateEventPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Kreiraj novi event objekt
+    if (!formData.sportType) {
+      toast.error('Please select a sport');
+      return;
+    }
+    
     const newEvent = {
-      id: Date.now(), // Jednostavan ID baziran na vremenu
-      title: formData.tags || 'Novi event', // Koristim tags kao title, možeš dodati posebno polje
+      id: Date.now(),
+      title: formData.eventTitle || 'Novi event',
+      imageUrl: formData.imageUrl || '',
       sport: SPORTS.find(s => s.id === parseInt(formData.sportType)),
-      creatorId: 1, // Placeholder - trebat će ti pravi user ID
+      creatorId: user.id,
       location: {
         name: formData.location,
         address: formData.location,
-        lat: 0, // Dodaj koordinate ako imaš
+        lat: 0,
         lng: 0,
       },
       date: formData.date,
       time: formData.startTime,
-      duration: 90, // Možeš izračunati iz startTime i endTime
+      duration: 90,
       maxPlayers: formData.participants,
-      currentPlayers: 1, // Creator je prvi participant
+      currentPlayers: 1,
       participants: [
-        { userId: 1, status: 'confirmed' }
+        { userId: user.id, status: 'confirmed' }
       ],
       description: formData.description || 'No description provided',
-      requiredLevel: 'intermediate',
+      requiredLevel: formData.requiredLevel || 'beginner',
       isPublic: true,
       createdAt: new Date().toISOString(),
       status: 'upcoming',
       points: formData.points,
     };
 
-    // Dohvati postojeće evente iz localStorage
     const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
-    
-    // Dodaj novi event
     existingEvents.push(newEvent);
-    
-    // Spremi natrag u localStorage
     localStorage.setItem('events', JSON.stringify(existingEvents));
     
     console.log('Event saved:', newEvent);
-    alert('Event successfully created! Check console for details.');
+    toast.success('Event successfully created! Check console for details.');
     
-    // Reset forme
     setFormData({
+      eventTitle: '',
+      imageUrl: '',
       sportType: '',
       date: '',
       startTime: '10:00 AM',
@@ -84,13 +93,16 @@ function CreateEventPage() {
       participants: 4,
       points: 10,
       tags: '',
-      description: ''
+      description: '',
+      requiredLevel: ''
     });
   };
 
   const handleCancel = () => {
-    console.log('Cancelled');
+    toast.info('Event creation cancelled.');
     setFormData({
+      eventTitle: '',
+      imageUrl: '',
       sportType: '',
       date: '',
       startTime: '10:00 AM',
@@ -109,6 +121,30 @@ function CreateEventPage() {
         <h1 className="event-title">Create New Event</h1>
 
         <form className="event-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Event Title</label>
+            <input 
+              type="text" 
+              className="form-input" 
+              placeholder="Enter event title"
+              name="eventTitle"
+              value={formData.eventTitle}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Image URL</label>
+            <input 
+              type="text" 
+              className="form-input" 
+              placeholder="Enter image URL"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleInputChange}
+            />
+          </div>
+
           <div className="form-group">
             <label className="form-label">Sport Type</label>
             <select 
