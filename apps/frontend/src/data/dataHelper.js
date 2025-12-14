@@ -26,16 +26,6 @@ export const getTodaysEvents = () => {
 export const getUserEvents = (userId) =>
   EVENTS.filter((event) => event.participants.some((p) => p.userId === userId));
 
-export const getUserFollowers = (userId) => {
-  const user = getUserById(userId);
-  return user ? user.followers.map((id) => getUserById(id)) : [];
-};
-
-export const getUserFollowing = (userId) => {
-  const user = getUserById(userId);
-  return user ? user.following.map((id) => getUserById(id)) : [];
-};
-
 export const getUserLevel = (points) => {
   return (
     LEVEL_THRESHOLDS.find(

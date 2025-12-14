@@ -5,38 +5,27 @@ import styles from './searchResultsPage.module.css';
 
 function SearchResultsPage() {
   const [params] = useSearchParams();
-  const query = params.get('q')?.toLowerCase() || '';
-  const filters = JSON.parse(params.get('filters') || '{}');
-  const events = getAllEvents();
+  const query = params.get('q') || '';
+  const filters = {
+    sport: params.get('sport') || '',
+    location: params.get('location') || '',
+    date: params.get('date') || '',
+  };
 
-  const filtered = events.filter((event) => {
-    const searchText = `
-    ${event.title}
-    ${event.description}
-    ${event.location?.name}
-    ${event.location?.address}
-    ${event.sport?.name}
-  `.toLowerCase();
+  const allEvents = getAllEvents();
 
-    const matchesQuery = !query || searchText.includes(query);
-
-    const matchesSport = !filters.sportType || event.sport?.id === filters.sportType;
-
-    const matchesLocation =
-      !filters.location || searchText.includes(filters.location.toLowerCase());
-
-    return matchesQuery && matchesSport && matchesLocation;
-  });
+  const searchResults = filterBySearch(allEvents, query);
+  const filteredResults = filterByFilters(searchResults, filters);
 
   return (
     <div className={styles['search-page']}>
       <h2 className={styles.heading}>
-        Search results for: <span className={styles['query']}>{query}</span>
+        Search results: <span className={styles['query']}>{query}</span>
       </h2>
 
-      {filtered.length === 0 && <p>No results found.</p>}
+      {filteredResults.length === 0 && <p>No results found.</p>}
 
-      {filtered.map((event) => (
+      {filteredResults.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}
     </div>
@@ -44,3 +33,30 @@ function SearchResultsPage() {
 }
 
 export default SearchResultsPage;
+
+function filterBySearch(events, query) {
+  if (!query) return events;
+  const q = query.toLowerCase();
+  return events.filter((event) => {
+    const text = `
+      ${event.title}
+      ${event.description}
+      ${event.location?.name}
+      ${event.location?.address}
+      ${event.sport?.name}
+    `.toLowerCase();
+    return !q || text.includes(q);
+  });
+}
+
+function filterByFilters(events, filters) {
+  return events.filter((event) => {
+    const matchesSport = !filters.sport || event.sport?.id.toString() === filters.sport;
+    const matchesLocation =
+      !filters.location ||
+      event.location?.name.toLowerCase().includes(filters.location.toLowerCase());
+    const matchesDate = !filters.date || event.date === filters.date;
+
+    return matchesSport && matchesLocation && matchesDate;
+  });
+}

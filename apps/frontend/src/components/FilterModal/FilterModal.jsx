@@ -1,6 +1,20 @@
 import styles from './filterModal.module.css';
+import { SPORTS } from '../../data';
+import { useNavigate } from 'react-router-dom';
 
 const FilterModal = ({ filters, setFilters, onClose }) => {
+  const navigate = useNavigate();
+
+  const handleApply = () => {
+    const searchParams = new URLSearchParams();
+    if (filters.sport) searchParams.set('sport', filters.sport);
+    if (filters.location) searchParams.set('location', filters.location);
+    if (filters.date) searchParams.set('date', filters.date);
+
+    navigate(`/search?${searchParams.toString()}`);
+    onClose();
+  };
+
   return (
     <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -13,9 +27,11 @@ const FilterModal = ({ filters, setFilters, onClose }) => {
             onChange={(e) => setFilters({ ...filters, sport: e.target.value })}
           >
             <option value="">All sports</option>
-            <option value="football">Football</option>
-            <option value="tennis">Tennis</option>
-            <option value="basketball">Basketball</option>
+            {SPORTS.map((sport) => (
+              <option key={sport.id} value={sport.id}>
+                {sport.icon} {sport.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -38,7 +54,7 @@ const FilterModal = ({ filters, setFilters, onClose }) => {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.apply} onClick={onClose}>
+          <button className={styles.apply} onClick={handleApply}>
             Apply
           </button>
           <button

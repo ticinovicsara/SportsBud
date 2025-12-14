@@ -23,9 +23,6 @@ const SearchBar = ({ query, setQuery, filterOpen, setFilterOpen }) => {
       return;
     }
 
-    console.log('Search query:', query);
-    console.log('Filters:', filters);
-
     navigate(`/search?q=${query}&filters=${encodeURIComponent(JSON.stringify(filters))}`);
   };
 
