@@ -4,10 +4,15 @@ import { faHouse, faCirclePlus, faUser } from '@fortawesome/free-solid-svg-icons
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
+import { getUserById } from '../../data/dataHelper';
 
 const NavBar = () => {
   const location = useLocation();
-  const user = useUser();
+  const { workingUser } = useUser();
+
+  const user = workingUser || getUserById(1);
+
+  if (!user) return null;
 
   const isActive = (path) => {
     return location.pathname === path;

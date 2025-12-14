@@ -1,6 +1,5 @@
 import { getEventById } from '../../data/dataHelper';
 import styles from './eventDetailsPage.module.css';
-import { sportsImage } from '../../assets';
 import { useParams } from 'react-router-dom';
 import {
   EventDescriptionCard,
@@ -36,7 +35,7 @@ function EventDetailsPage() {
 
         <EventDescriptionCard event={event} />
 
-        <EventOrganizerCard organizerId={event.organiserId} />
+        <EventOrganizerCard organizerId={event.creatorId} />
 
         <EventParticipantsCard participants={event.participants} maxPlayers={event.maxPlayers} />
       </div>

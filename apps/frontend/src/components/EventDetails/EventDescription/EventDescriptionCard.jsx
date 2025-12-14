@@ -18,7 +18,7 @@ const EventDescriptionCard = ({ event }) => {
 
       <div className={styles['additional-content']}>
         <FontAwesomeIcon icon={faTag} className={styles['icon']} />
-        <p>{event.tags.join(', ')}</p>
+        <p>{Array.isArray(event.tags) ? event.tags.join(', ') : event.tags || 'No tags'}</p>
       </div>
     </div>
   );

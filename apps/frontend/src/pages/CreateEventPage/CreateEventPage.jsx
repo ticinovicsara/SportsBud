@@ -9,7 +9,7 @@ function CreateEventPage() {
   //const {user} = useUser();
 
   // TEMPORARY: Za testiranje
-  const user = { id: 1, name: 'Test User' };
+  const userId = 1;
 
   const [formData, setFormData] = useState({
     eventTitle: '',
@@ -63,7 +63,7 @@ function CreateEventPage() {
       title: formData.eventTitle || 'Novi event',
       imageUrl: formData.imageUrl || '',
       sport: SPORTS.find((s) => s.id === parseInt(formData.sportType)),
-      creatorId: user.id,
+      creatorId: userId,
       location: {
         name: formData.location,
         address: formData.location,
@@ -75,7 +75,7 @@ function CreateEventPage() {
       duration: 90,
       maxPlayers: formData.participants,
       currentPlayers: 1,
-      participants: [{ userId: user.id, status: 'confirmed' }],
+      participants: [{ userId: userId, status: 'confirmed' }],
       description: formData.description || 'No description provided',
       requiredLevel: formData.requiredLevel || 'beginner',
       isPublic: true,
