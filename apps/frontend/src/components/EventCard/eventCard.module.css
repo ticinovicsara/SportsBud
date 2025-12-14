@@ -14,3 +14,12 @@
 .icon {
   color: var(--color-primary-green);
 }
+
+.sport-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--font-color-gray);
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+}

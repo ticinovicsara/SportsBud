@@ -1,0 +1,16 @@
+.search-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.5em;
+}
+
+.heading {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--font-color-black);
+  margin-bottom: 1.5em;
+}
+
+.query {
+  color: var(--color-primary-green);
+}

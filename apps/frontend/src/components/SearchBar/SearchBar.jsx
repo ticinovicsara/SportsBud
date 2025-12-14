@@ -5,6 +5,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import FilterModal from '../FilterModal/FilterModal';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SearchBar = ({ query, setQuery, filterOpen, setFilterOpen }) => {
   const [filters, setFilters] = useState({
@@ -15,6 +16,19 @@ const SearchBar = ({ query, setQuery, filterOpen, setFilterOpen }) => {
   });
 
   const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (!query.trim()) {
+      toast.info('Enter a search term');
+      return;
+    }
+
+    console.log('Search query:', query);
+    console.log('Filters:', filters);
+
+    navigate(`/search?q=${query}&filters=${encodeURIComponent(JSON.stringify(filters))}`);
+  };
+
   return (
     <>
       <div className={styles.searchBar}>
@@ -23,10 +37,9 @@ const SearchBar = ({ query, setQuery, filterOpen, setFilterOpen }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              navigate(`/search?q=${query}`);
-            }
+            if (e.key === 'Enter') handleSearch();
           }}
+          noMargin
         />
 
         <button onClick={() => setFilterOpen(true)} className={styles.filterBtn}>
@@ -37,6 +50,7 @@ const SearchBar = ({ query, setQuery, filterOpen, setFilterOpen }) => {
         <FilterModal
           filters={filters}
           setFilters={setFilters}
+          onApply={handleSearch}
           onClose={() => setFilterOpen(false)}
         />
       )}
