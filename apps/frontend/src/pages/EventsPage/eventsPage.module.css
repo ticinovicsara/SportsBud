@@ -3,20 +3,3 @@
   box-sizing: border-box;
   padding: 1.5em;
 }
-
-.event-card {
-  margin-bottom: 3em;
-}
-
-.additional-content {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  color: var(--font-color-gray);
-  margin-top: -1.7em;
-  margin-bottom: 1em;
-}
-
-.icon {
-  color: var(--color-primary-green);
-}

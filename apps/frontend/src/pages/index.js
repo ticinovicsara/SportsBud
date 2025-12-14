@@ -6,3 +6,4 @@ export { default as EventDetailsPage } from './EventDetailsPage/EventDetailsPage
 export { default as CreateEventPage } from './CreateEventPage/CreateEventPage.jsx';
 export { default as NotFoundPage } from './NotFoundPage/NotFoundPage.jsx';
 export { default as EventsPage } from './EventsPage/EventsPage.jsx';
+export { default as SearchResultsPage } from './ResultsPage/ResultsPage.jsx';
