@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { SPORTS } from '../../data/sports';
 import { USERS } from '../../data/users';
 import { toast } from 'react-toastify';
-import "./createEventPage.css";
+import styles from './createEventPage.module.css';
+import { EVENTS } from '../../data';
 
 function CreateEventPage() {
   //const {user} = useUser();
-  
+
   // TEMPORARY: Za testiranje
   const user = { id: 1, name: 'Test User' };
 
@@ -21,37 +22,47 @@ function CreateEventPage() {
     participants: 4,
     points: 10,
     tags: '',
-    description: ''
+    description: '',
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleCounterChange = (field, increment) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: Math.max(1, prev[field] + (increment ? 1 : -1))
+      [field]: Math.max(1, prev[field] + (increment ? 1 : -1)),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (!formData.sportType) {
-      toast.error('Please select a sport');
+
+    if (
+      !formData.date ||
+      !formData.sportType ||
+      !formData.location ||
+      !formData.startTime ||
+      !formData.endTime ||
+      !formData.description ||
+      !formData.eventTitle ||
+      !formData.participants ||
+      !formData.points
+    ) {
+      toast.error('Please fill in all required fields.');
       return;
     }
-    
+
     const newEvent = {
       id: Date.now(),
       title: formData.eventTitle || 'Novi event',
       imageUrl: formData.imageUrl || '',
-      sport: SPORTS.find(s => s.id === parseInt(formData.sportType)),
+      sport: SPORTS.find((s) => s.id === parseInt(formData.sportType)),
       creatorId: user.id,
       location: {
         name: formData.location,
@@ -64,9 +75,7 @@ function CreateEventPage() {
       duration: 90,
       maxPlayers: formData.participants,
       currentPlayers: 1,
-      participants: [
-        { userId: user.id, status: 'confirmed' }
-      ],
+      participants: [{ userId: user.id, status: 'confirmed' }],
       description: formData.description || 'No description provided',
       requiredLevel: formData.requiredLevel || 'beginner',
       isPublic: true,
@@ -78,10 +87,10 @@ function CreateEventPage() {
     const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
     existingEvents.push(newEvent);
     localStorage.setItem('events', JSON.stringify(existingEvents));
-    
-    console.log('Event saved:', newEvent);
-    toast.success('Event successfully created! Check console for details.');
-    
+
+    console.log('Event saved:', newEvent, existingEvents);
+    toast.success('Event successfully created!');
+
     setFormData({
       eventTitle: '',
       imageUrl: '',
@@ -94,7 +103,7 @@ function CreateEventPage() {
       points: 10,
       tags: '',
       description: '',
-      requiredLevel: ''
+      requiredLevel: '',
     });
   };
 
@@ -111,21 +120,21 @@ function CreateEventPage() {
       participants: 4,
       points: 10,
       tags: '',
-      description: ''
+      description: '',
     });
   };
 
   return (
-    <div className="create-event-page">
-      <div className="event-container">
-        <h1 className="event-title">Create New Event</h1>
+    <div className={styles['create-event-page']}>
+      <div className={styles['event-container']}>
+        <h1 className={styles['event-title']}>Create New Event</h1>
 
-        <form className="event-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label">Event Title</label>
-            <input 
-              type="text" 
-              className="form-input" 
+        <form className={styles['event-form']} onSubmit={handleSubmit}>
+          <div className={styles['form-group']}>
+            <label className={styles['form-label']}>Event Title</label>
+            <input
+              type="text"
+              className={styles['form-input']}
               placeholder="Enter event title"
               name="eventTitle"
               value={formData.eventTitle}
@@ -133,11 +142,11 @@ function CreateEventPage() {
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Image URL</label>
-            <input 
-              type="text" 
-              className="form-input" 
+          <div className={styles['form-group']}>
+            <label className={styles['form-label']}>Image URL</label>
+            <input
+              type="text"
+              className={styles['form-input']}
               placeholder="Enter image URL"
               name="imageUrl"
               value={formData.imageUrl}
@@ -145,16 +154,16 @@ function CreateEventPage() {
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Sport Type</label>
-            <select 
-              className="form-select"
+          <div className={styles['form-group']}>
+            <label className={styles['form-label']}>Sport Type</label>
+            <select
+              className={styles['form-select']}
               name="sportType"
               value={formData.sportType}
               onChange={handleInputChange}
             >
               <option value="">Odaberi sport</option>
-              {SPORTS.map(sport => (
+              {SPORTS.map((sport) => (
                 <option key={sport.id} value={sport.id}>
                   {sport.icon} {sport.name}
                 </option>
@@ -162,11 +171,11 @@ function CreateEventPage() {
             </select>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Date</label>
-            <input 
-              type="text" 
-              className="form-input" 
+          <div className={styles['form-group']}>
+            <label className={styles['form-label']}>Date</label>
+            <input
+              type="text"
+              className={styles['form-input']}
               placeholder="MM/DD/YYYY"
               name="date"
               value={formData.date}
@@ -174,23 +183,23 @@ function CreateEventPage() {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">Start Time</label>
-              <input 
-                type="text" 
-                className="form-input" 
+          <div className={styles['form-row']}>
+            <div className={styles['form-group']}>
+              <label className={styles['form-label']}>Start Time</label>
+              <input
+                type="text"
+                className={styles['form-input']}
                 name="startTime"
                 value={formData.startTime}
                 onChange={handleInputChange}
               />
             </div>
 
-            <div className="form-group">
-              <label className="form-label">End Time</label>
-              <input 
-                type="text" 
-                className="form-input" 
+            <div className={styles['form-group']}>
+              <label className={styles['form-label']}>End Time</label>
+              <input
+                type="text"
+                className={styles['form-input']}
                 name="endTime"
                 value={formData.endTime}
                 onChange={handleInputChange}
@@ -198,11 +207,11 @@ function CreateEventPage() {
             </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Location</label>
-            <input 
-              type="text" 
-              className="form-input" 
+          <div className={styles['form-group']}>
+            <label className={styles['form-label']}>Location</label>
+            <input
+              type="text"
+              className={styles['form-input']}
               placeholder="Enter location"
               name="location"
               value={formData.location}
@@ -210,21 +219,21 @@ function CreateEventPage() {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">Number of Participants</label>
-              <div className="counter">
-                <button 
-                  type="button" 
-                  className="counter-btn"
+          <div className={styles['form-row']}>
+            <div className={styles['form-group']}>
+              <label className={styles['form-label']}>Number of Participants</label>
+              <div className={styles['counter']}>
+                <button
+                  type="button"
+                  className={styles['counter-btn']}
                   onClick={() => handleCounterChange('participants', false)}
                 >
                   -
                 </button>
-                <span className="counter-value">{formData.participants}</span>
-                <button 
-                  type="button" 
-                  className="counter-btn"
+                <span className={styles['counter-value']}>{formData.participants}</span>
+                <button
+                  type="button"
+                  className={styles['counter-btn']}
                   onClick={() => handleCounterChange('participants', true)}
                 >
                   +
@@ -232,20 +241,20 @@ function CreateEventPage() {
               </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Points awarded</label>
-              <div className="counter">
-                <button 
-                  type="button" 
-                  className="counter-btn"
+            <div className={styles['form-group']}>
+              <label className={styles['form-label']}>Points awarded</label>
+              <div className={styles['counter']}>
+                <button
+                  type="button"
+                  className={styles['counter-btn']}
                   onClick={() => handleCounterChange('points', false)}
                 >
                   -
                 </button>
-                <span className="counter-value">{formData.points}</span>
-                <button 
-                  type="button" 
-                  className="counter-btn"
+                <span className={styles['counter-value']}>{formData.points}</span>
+                <button
+                  type="button"
+                  className={styles['counter-btn']}
                   onClick={() => handleCounterChange('points', true)}
                 >
                   +
@@ -254,13 +263,13 @@ function CreateEventPage() {
             </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label tags-label">
-              <span className="hash-icon">#</span> Event tags
+          <div className={styles['form-group']}>
+            <label className={styles['form-label tags-label']}>
+              <span className={styles['hash-icon']}>#</span> Event tags
             </label>
-            <input 
-              type="text" 
-              className="form-input" 
+            <input
+              type="text"
+              className={styles['form-input']}
               placeholder="Tags"
               name="tags"
               value={formData.tags}
@@ -268,10 +277,10 @@ function CreateEventPage() {
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Description</label>
-            <textarea 
-              className="form-textarea" 
+          <div className={styles['form-group']}>
+            <label className={styles['form-label']}>Description</label>
+            <textarea
+              className={styles['form-textarea']}
               placeholder="Enter event description"
               name="description"
               value={formData.description}
@@ -280,15 +289,11 @@ function CreateEventPage() {
             />
           </div>
 
-          <div className="button-group">
-            <button type="submit" className="btn btn-primary">
+          <div className={styles['button-group']}>
+            <button type="submit" className={styles['btn-primary']}>
               Create Event
             </button>
-            <button 
-              type="button" 
-              className="btn btn-secondary"
-              onClick={handleCancel}
-            >
+            <button type="button" className={styles['btn-secondary']} onClick={handleCancel}>
               Cancel
             </button>
           </div>
