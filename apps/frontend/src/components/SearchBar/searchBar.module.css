@@ -1,0 +1,22 @@
+.searchBar {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  padding: 0.5em;
+  border-radius: 999px;
+  background: var(--input-background);
+  box-sizing: border-box;
+}
+
+.filterBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterIcon {
+  scale: 1.5;
+}
