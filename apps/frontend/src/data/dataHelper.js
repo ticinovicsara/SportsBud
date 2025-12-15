@@ -4,7 +4,7 @@ import { SPORTS } from '../data/sports.js';
 
 export const getUserById = (id) => USERS.find((user) => user.id === id);
 
-export const getEventById = (id) => EVENTS.find((event) => event.id === id);
+export const getEventById = (id) => getAllEvents().find((event) => event.id === id);
 
 export const getSportById = (id) => SPORTS.find((sport) => sport.id === id);
 
@@ -12,6 +12,11 @@ export const getUpcomingEvents = () =>
   EVENTS.filter((event) => event.status === 'upcoming').sort(
     (a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time)
   );
+
+export function getAllEvents() {
+  const localEvents = JSON.parse(localStorage.getItem('events') || '[]');
+  return [...EVENTS, ...localEvents];
+}
 
 export const getTodaysEvents = () => {
   const today = new Date().toISOString().split('T')[0];
