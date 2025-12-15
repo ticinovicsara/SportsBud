@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './homePage.module.css';
 
 function HomePage() {
@@ -21,7 +22,11 @@ function HomePage() {
 
       <div className={styles['upcoming-row']}>
         <h2 className={styles['upcoming-text']}>Upcoming Events</h2>
-        <span className={styles['see-all']}>See all</span>
+        <span className={styles['see-all']}>
+          <Link to="/events" className={styles['see-all-link']}>
+            See All
+          </Link>
+        </span>
       </div>
 
       <div className={styles['event-card']}>

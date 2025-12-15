@@ -131,3 +131,8 @@
 .join-button:hover {
   opacity: 0.9;
 }
+
+.see-all-link {
+  color: inherit;
+  text-decoration: none;
+}
