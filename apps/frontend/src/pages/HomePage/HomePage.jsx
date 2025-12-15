@@ -18,6 +18,33 @@ function HomePage() {
           <p className={styles['joined']}>🧍 15/20 people joined</p>
         </div>
       </div>
+
+      <div className={styles['upcoming-row']}>
+        <h2 className={styles['upcoming-text']}>Upcoming Events</h2>
+        <span className={styles['see-all']}>See all</span>
+      </div>
+
+      <div className={styles['event-card']}>
+        <div className={styles['event-header']}>
+          <h3 className={styles['event-title']}>Soccer Tournament</h3>
+          <span className={styles['spots-left']}>5 SPOTS LEFT</span>
+        </div>
+
+        <p className={styles['event-time']}>Tomorrow, 10:00 AM</p>
+
+        <p className={styles['event-description']}>
+          Join our monthly amateur soccer tournament at Meadow Fields. All skill levels welcome!
+        </p>
+
+        <div className={styles['event-footer']}>
+          <div className={styles['host']}>
+            <img src="https://i.pravatar.cc/40" alt="host" className={styles['avatar']} />
+            <span>Mark Chen</span>
+          </div>
+
+          <button className={styles['join-button']}>Join</button>
+        </div>
+      </div>
     </div>
   );
 }
