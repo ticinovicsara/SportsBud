@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import styles from './homePage.module.css';
 
 function HomePage() {
+  const [query, setQuery] = useState('');
+  const [filterOpen, setFilterOpen] = useState(false);
+
   return (
     <div className={styles['home-page']}>
       <div className={styles['cards-container']}>
