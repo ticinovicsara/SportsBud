@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './homePage.module.css';
+import { SearchBar } from '../../components';
+import { useState } from 'react';
 
 function HomePage() {
   const [query, setQuery] = useState('');
@@ -7,6 +9,7 @@ function HomePage() {
 
   return (
     <div className={styles['home-page']}>
+      <SearchBar query={query} setQuery={setQuery} onFilterClick={() => setFilterOpen(true)} />
       <div className={styles['cards-container']}>
         <div className={styles['card']}>
           <p className={styles['time']}>2:00 PM</p>
