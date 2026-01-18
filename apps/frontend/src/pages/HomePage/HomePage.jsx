@@ -2,60 +2,76 @@ import { Link } from 'react-router-dom';
 import styles from './homePage.module.css';
 import { SearchBar } from '../../components';
 import { useState } from 'react';
+import { getUpcomingEvents, getUserById } from '../../data';
 
 function HomePage() {
   const [query, setQuery] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
 
+  const allEvents = getUpcomingEvents();
+
+  const now = new Date();
+  const upcomingEvents = allEvents.filter(event => {
+    const eventDateTime = new Date(`${event.date}T${event.startTime}`);
+    return eventDateTime > now;
+  });
+
+  const topEvents = upcomingEvents.slice(0, 2);
+  const remainingEvents = upcomingEvents.slice(2);
+
   return (
     <div className={styles['home-page']}>
       <SearchBar query={query} setQuery={setQuery} onFilterClick={() => setFilterOpen(true)} />
-      <div className={styles['cards-container']}>
-        <div className={styles['card']}>
-          <p className={styles['time']}>2:00 PM</p>
-          <h3 className={styles['title']}>Basketball Pickup Game</h3>
-          <p className={styles['location']}>Central Park Courts</p>
-          <p className={styles['joined']}>🧍 8/12 players joined</p>
-        </div>
 
-        <div className={styles['card']}>
-          <p className={styles['time']}>5:30 PM</p>
-          <h3 className={styles['title']}>Evening Yoga Session</h3>
-          <p className={styles['location']}>Riverside Park</p>
-          <p className={styles['joined']}>🧍 15/20 people joined</p>
-        </div>
+      {/* Top 2 events */}
+      <div className={styles['top-events-container']}>
+        {topEvents.map((event) => (
+          <div key={event.id} className={styles['top-card']}>
+            <h3 className={styles['title']}>{event.title}</h3>
+            <p className={styles['time']}>{event.startTime}</p>
+            <p className={styles['location']}>{event.location.name}</p>
+            <p className={styles['joined']}>{event.currentPlayers}/{event.maxPlayers} players joined</p>
+          </div>
+        ))}
       </div>
 
-      <div className={styles['upcoming-row']}>
-        <h2 className={styles['upcoming-text']}>Upcoming Events</h2>
-        <span className={styles['see-all']}>
-          <Link to="/events" className={styles['see-all-link']}>
-            See All
-          </Link>
-        </span>
-      </div>
-
-      <div className={styles['event-card']}>
-        <div className={styles['event-header']}>
-          <h3 className={styles['event-title']}>Soccer Tournament</h3>
-          <span className={styles['spots-left']}>5 SPOTS LEFT</span>
-        </div>
-
-        <p className={styles['event-time']}>Tomorrow, 10:00 AM</p>
-
-        <p className={styles['event-description']}>
-          Join our monthly amateur soccer tournament at Meadow Fields. All skill levels welcome!
-        </p>
-
-        <div className={styles['event-footer']}>
-          <div className={styles['host']}>
-            <img src="https://i.pravatar.cc/40" alt="host" className={styles['avatar']} />
-            <span>Mark Chen</span>
+      {/* Upcoming Events */}
+      {remainingEvents.length > 0 && (
+        <>
+          <div className={styles['upcoming-row']}>
+            <h2 className={styles['upcoming-text']}>Upcoming Events</h2>
+            <span className={styles['see-all']}>
+              <Link to="/events" className={styles['see-all-link']}>See All</Link>
+            </span>
           </div>
 
-          <button className={styles['join-button']}>Join</button>
-        </div>
-      </div>
+          <div className={styles['cards-container']}>
+            {remainingEvents.map((event) => {
+              const organiser = getUserById(event.organiserId);
+              return (
+                <div key={event.id} className={styles['card']}>
+                  <h3 className={styles['title']}>{event.title}</h3>
+                  <p className={styles['time']}>{event.date}, {event.startTime}</p>
+                  <p className={styles['location']}>{event.location.name}</p>
+                  <p className={styles['spots-left']}>
+                    {event.maxPlayers - event.currentPlayers} SPOTS LEFT
+                  </p>
+                  <p className={styles['description']}>{event.description}</p>
+
+                  <div className={styles['host']}>
+                    {organiser?.profileImage && (
+                      <img src={organiser.profileImage} alt="host" className={styles['avatar']} />
+                    )}
+                    <span>{organiser?.firstName}</span>
+                  </div>
+
+                  <button className={styles['join-button']}>Join</button>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
