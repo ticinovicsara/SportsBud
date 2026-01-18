@@ -3,6 +3,7 @@ import styles from './homePage.module.css';
 import { SearchBar } from '../../components';
 import { useState } from 'react';
 import { getUpcomingEvents, getUserById } from '../../data';
+import { toast } from 'react-toastify';
 
 function HomePage() {
   const [query, setQuery] = useState('');
@@ -19,11 +20,14 @@ function HomePage() {
   const topEvents = upcomingEvents.slice(0, 2);
   const remainingEvents = upcomingEvents.slice(2);
 
+  const handleJoin = (eventTitle) => {
+    toast.success(`Successfully joined ${eventTitle}! 🎉`, {});
+  };
+
   return (
     <div className={styles['home-page']}>
       <SearchBar query={query} setQuery={setQuery} onFilterClick={() => setFilterOpen(true)} />
 
-      {/* Top 2 events */}
       <div className={styles['top-events-container']}>
         {topEvents.map((event) => (
           <div key={event.id} className={styles['top-card']}>
@@ -39,7 +43,6 @@ function HomePage() {
         ))}
       </div>
 
-      {/* Upcoming Events */}
       {remainingEvents.length > 0 && (
         <>
           <div className={styles['upcoming-row']}>
@@ -75,13 +78,21 @@ function HomePage() {
                     <span>{organiser?.firstName}</span>
                   </div>
 
-                  <button className={styles['join-button']}>Join</button>
+                  <button className={styles['join-button']} onClick={() => handleJoin(event.title)}>
+                    Join
+                  </button>
                 </div>
               );
             })}
           </div>
         </>
       )}
+
+      <button className={styles['edit-events-button']}>
+        <Link to="/edit-events" className={styles['edit-events-link']}>
+          {'Edit My Events'}
+        </Link>
+      </button>
     </div>
   );
 }

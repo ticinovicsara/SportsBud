@@ -10,6 +10,8 @@ import {
   EventsPage,
   SearchResultsPage,
   EventParticipantsPage,
+  EditMyEventsPage,
+  EditEventPage,
 } from '../pages/index.js';
 import { useUser } from '../context/UserContext.jsx';
 import { MainLayout, AuthLayout } from '../layouts/index.js';
@@ -31,6 +33,8 @@ export default function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/create-event" element={<CreateEventPage />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/edit-events" element={<EditMyEventsPage />} />
+        <Route path="/edit-event/:id" element={<EditEventPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="/events/:id" element={<EventDetailsPage />} />
         <Route path="/search" element={<SearchResultsPage />} />

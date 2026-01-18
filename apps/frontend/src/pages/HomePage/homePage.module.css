@@ -159,3 +159,20 @@
   color: inherit;
   text-decoration: none;
 }
+
+.edit-events-button {
+  width: 100%;
+  padding: 1rem;
+  margin: 2rem 0;
+  background-color: var(--color-primary-green);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.edit-events-link {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
