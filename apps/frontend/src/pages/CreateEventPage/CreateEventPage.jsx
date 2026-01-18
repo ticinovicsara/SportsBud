@@ -30,9 +30,8 @@ function CreateEventPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Validacijska funkcija za URL
   const isValidUrl = (url) => {
-    if (!url) return true; // URL je opcionalan
+    if (!url) return true;
     try {
       new URL(url);
       return true;
@@ -41,7 +40,6 @@ function CreateEventPage() {
     }
   };
 
-  // Validacija datuma (MM/DD/YYYY format i mora biti u budućnosti)
   const isValidDate = (dateString) => {
     const regex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
     if (!regex.test(dateString)) return false;
@@ -51,39 +49,34 @@ function CreateEventPage() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Provjeri je li datum validan i u budućnosti
     return inputDate >= today && inputDate.getMonth() === month - 1;
   };
 
-  // Validacija vremena (HH:MM AM/PM format)
   const isValidTime = (timeString) => {
     const regex = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
     return regex.test(timeString);
   };
 
-  // Provjera je li End Time nakon Start Time
   const isEndTimeAfterStartTime = (startTime, endTime) => {
     const parseTime = (timeStr) => {
       const [time, period] = timeStr.split(' ');
       let [hours, minutes] = time.split(':').map(Number);
-      
+
       if (period.toUpperCase() === 'PM' && hours !== 12) {
         hours += 12;
       } else if (period.toUpperCase() === 'AM' && hours === 12) {
         hours = 0;
       }
-      
+
       return hours * 60 + minutes;
     };
 
     return parseTime(endTime) > parseTime(startTime);
   };
 
-  // Validacija cijelog forme
   const validateForm = () => {
     const newErrors = {};
 
-    // Event Title validacija
     if (!formData.eventTitle.trim()) {
       newErrors.eventTitle = 'Event title is required';
     } else if (formData.eventTitle.length < 3) {
@@ -92,61 +85,55 @@ function CreateEventPage() {
       newErrors.eventTitle = 'Event title must be less than 100 characters';
     }
 
-    // Image URL validacija
     if (formData.imageUrl && !isValidUrl(formData.imageUrl)) {
       newErrors.imageUrl = 'Please enter a valid URL';
     }
 
-    // Sport Type validacija
     if (!formData.sportType) {
       newErrors.sportType = 'Please select a sport type';
     }
 
-    // Date validacija
     if (!formData.date) {
       newErrors.date = 'Date is required';
     } else if (!isValidDate(formData.date)) {
       newErrors.date = 'Please enter a valid future date (MM/DD/YYYY)';
     }
 
-    // Start Time validacija
     if (!formData.startTime) {
       newErrors.startTime = 'Start time is required';
     } else if (!isValidTime(formData.startTime)) {
       newErrors.startTime = 'Please enter valid time (HH:MM AM/PM)';
     }
 
-    // End Time validacija
     if (!formData.endTime) {
       newErrors.endTime = 'End time is required';
     } else if (!isValidTime(formData.endTime)) {
       newErrors.endTime = 'Please enter valid time (HH:MM AM/PM)';
-    } else if (isValidTime(formData.startTime) && !isEndTimeAfterStartTime(formData.startTime, formData.endTime)) {
+    } else if (
+      isValidTime(formData.startTime) &&
+      !isEndTimeAfterStartTime(formData.startTime, formData.endTime)
+    ) {
       newErrors.endTime = 'End time must be after start time';
     }
 
-    // Location validacija
     if (!formData.location.trim()) {
       newErrors.location = 'Location is required';
     } else if (formData.location.length < 3) {
       newErrors.location = 'Location must be at least 3 characters';
     }
 
-    // Participants validacija
     if (formData.participants < 2) {
       newErrors.participants = 'Minimum 2 participants required';
     } else if (formData.participants > 100) {
       newErrors.participants = 'Maximum 100 participants allowed';
     }
 
-    // Points validacija
     if (formData.points < 1) {
       newErrors.points = 'Minimum 1 point required';
     } else if (formData.points > 1000) {
       newErrors.points = 'Maximum 1000 points allowed';
     }
 
-    // Description validacija
     if (!formData.description.trim()) {
       newErrors.description = 'Description is required';
     } else if (formData.description.length < 10) {
@@ -155,7 +142,6 @@ function CreateEventPage() {
       newErrors.description = 'Description must be less than 500 characters';
     }
 
-    // Tags validacija (opcionalno)
     if (formData.tags && formData.tags.length > 100) {
       newErrors.tags = 'Tags must be less than 100 characters';
     }
@@ -164,26 +150,23 @@ function CreateEventPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Filtriraj usere na temelju search term-a
   const filteredUsers = USERS.filter((user) => {
-    if (user.id === userId) return false; // Ne prikazuj kreатora eventa
-    if (selectedUsers.find((u) => u.id === user.id)) return false; // Ne prikazuj već odabrane
-    
+    if (user.id === userId) return false;
+    if (selectedUsers.find((u) => u.id === user.id)) return false;
+
     const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
     const username = user.username.toLowerCase();
     const search = searchTerm.toLowerCase();
-    
+
     return fullName.includes(search) || username.includes(search);
   });
 
-  // Dodaj usera u selekciju
   const handleAddUser = (user) => {
     setSelectedUsers([...selectedUsers, user]);
     setSearchTerm('');
     setShowDropdown(false);
   };
 
-  // Ukloni usera iz selekcije
   const handleRemoveUser = (userId) => {
     setSelectedUsers(selectedUsers.filter((user) => user.id !== userId));
   };
@@ -195,7 +178,6 @@ function CreateEventPage() {
       [name]: value,
     }));
 
-    // Očisti error za to polje kada korisnik počne tipkati
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -206,13 +188,12 @@ function CreateEventPage() {
 
   const handleCounterChange = (field, increment) => {
     const newValue = Math.max(1, formData[field] + (increment ? 1 : -1));
-    
+
     setFormData((prev) => ({
       ...prev,
       [field]: newValue,
     }));
 
-    // Očisti error za to polje
     if (errors[field]) {
       setErrors((prev) => ({
         ...prev,
@@ -224,7 +205,6 @@ function CreateEventPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Pokreni validaciju
     if (!validateForm()) {
       toast.error('Please fix the errors in the form');
       return;
@@ -268,7 +248,6 @@ function CreateEventPage() {
       console.log('Event saved:', newEvent, existingEvents);
       toast.success('Event successfully created!');
 
-      // Reset forme
       setFormData({
         eventTitle: '',
         imageUrl: '',
@@ -341,9 +320,7 @@ function CreateEventPage() {
               value={formData.imageUrl}
               onChange={handleInputChange}
             />
-            {errors.imageUrl && (
-              <span className={styles['error-message']}>{errors.imageUrl}</span>
-            )}
+            {errors.imageUrl && <span className={styles['error-message']}>{errors.imageUrl}</span>}
           </div>
 
           <div className={styles['form-group']}>
@@ -376,9 +353,7 @@ function CreateEventPage() {
               value={formData.date}
               onChange={handleInputChange}
             />
-            {errors.date && (
-              <span className={styles['error-message']}>{errors.date}</span>
-            )}
+            {errors.date && <span className={styles['error-message']}>{errors.date}</span>}
           </div>
 
           <div className={styles['form-row']}>
@@ -407,9 +382,7 @@ function CreateEventPage() {
                 value={formData.endTime}
                 onChange={handleInputChange}
               />
-              {errors.endTime && (
-                <span className={styles['error-message']}>{errors.endTime}</span>
-              )}
+              {errors.endTime && <span className={styles['error-message']}>{errors.endTime}</span>}
             </div>
           </div>
 
@@ -423,9 +396,7 @@ function CreateEventPage() {
               value={formData.location}
               onChange={handleInputChange}
             />
-            {errors.location && (
-              <span className={styles['error-message']}>{errors.location}</span>
-            )}
+            {errors.location && <span className={styles['error-message']}>{errors.location}</span>}
           </div>
 
           <div className={styles['form-row']}>
@@ -472,9 +443,7 @@ function CreateEventPage() {
                   +
                 </button>
               </div>
-              {errors.points && (
-                <span className={styles['error-message']}>{errors.points}</span>
-              )}
+              {errors.points && <span className={styles['error-message']}>{errors.points}</span>}
             </div>
           </div>
 
@@ -490,9 +459,7 @@ function CreateEventPage() {
               value={formData.tags}
               onChange={handleInputChange}
             />
-            {errors.tags && (
-              <span className={styles['error-message']}>{errors.tags}</span>
-            )}
+            {errors.tags && <span className={styles['error-message']}>{errors.tags}</span>}
           </div>
 
           <div className={styles['form-group']}>
@@ -509,7 +476,7 @@ function CreateEventPage() {
                 }}
                 onFocus={() => setShowDropdown(true)}
               />
-              
+
               {showDropdown && searchTerm && filteredUsers.length > 0 && (
                 <div className={styles['user-dropdown']}>
                   {filteredUsers.slice(0, 5).map((user) => (
