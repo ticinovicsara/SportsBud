@@ -1,11 +1,11 @@
 .profile-page {
-  min-height: 100vh;
   padding: 24px;
   padding-bottom: 100px;
   background-color: #f3f4f6;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .no-user {
@@ -18,7 +18,7 @@
 .profile-container {
   position: relative;
   width: 100%;
-  /*max-width: 400px;*/
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-title {
@@ -88,6 +88,7 @@
 .input-group input,
 .input-group textarea {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   border-radius: 20px;
   border: 1px solid #e5e7eb;
