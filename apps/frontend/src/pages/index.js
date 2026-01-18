@@ -7,3 +7,4 @@ export { default as CreateEventPage } from './CreateEventPage/CreateEventPage.js
 export { default as NotFoundPage } from './NotFoundPage/NotFoundPage.jsx';
 export { default as EventsPage } from './EventsPage/EventsPage.jsx';
 export { default as SearchResultsPage } from './SearchResultsPage/SearchResultsPage.jsx';
+export { default as EventParticipantsPage } from './EventParticipantsPage/EventParticipantsPage.jsx';
