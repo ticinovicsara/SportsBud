@@ -23,3 +23,20 @@
 .participant-link:hover {
   cursor: pointer;
 }
+
+.participant-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  padding: 1rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.view-link {
+  display: inline-block;
+  color: var(--color-primary-green);
+  text-decoration: none;
+  font-weight: bold;
+}
