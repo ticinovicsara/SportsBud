@@ -6,6 +6,9 @@
   margin-bottom: 1em;
   text-align: left;
 }
+.noMargin {
+  margin-bottom: 0;
+}
 
 .label {
   font-size: 1em;
@@ -35,4 +38,8 @@
   color: var(--font-color-gray);
   font-weight: bold;
   opacity: 0.5;
+}
+
+.input:read-only {
+  cursor: not-allowed;
 }

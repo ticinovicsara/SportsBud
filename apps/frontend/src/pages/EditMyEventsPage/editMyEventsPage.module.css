@@ -1,0 +1,73 @@
+.my-events-page {
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 28px;
+  margin-bottom: 1.5rem;
+}
+
+.empty-text {
+  color: #666;
+  font-size: 16px;
+}
+
+.events-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.event-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.event-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+  color: #222;
+}
+
+.event-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-date,
+.event-location {
+  font-size: 14px;
+  color: #555;
+  margin: 6px 0;
+}
+
+.edit-event-button {
+  width: 20%;
+  padding: 1rem;
+  margin: rem 0;
+  background-color: var(--color-primary-green);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.edit-event-link {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}

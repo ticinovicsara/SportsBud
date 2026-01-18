@@ -143,7 +143,3 @@ export const USERS = [
     createdAt: '2023-12-08T08:20:00Z',
   },
 ];
-
-export function getUserById(id) {
-  return USERS.find(user => user.id === id);
-}

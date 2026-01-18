@@ -1,0 +1,42 @@
+.event-participants-card {
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--font-color-gray);
+  border-radius: 20px;
+  margin-top: 1em;
+}
+
+.participants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5em;
+}
+
+.participant-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.participant-link:hover {
+  cursor: pointer;
+}
+
+.participant-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  padding: 1rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.view-link {
+  display: inline-block;
+  color: var(--color-primary-green);
+  text-decoration: none;
+  font-weight: bold;
+}

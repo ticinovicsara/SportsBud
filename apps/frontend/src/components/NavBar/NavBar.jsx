@@ -3,9 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCirclePlus, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
+import { getUserById } from '../../data/dataHelper';
 
 const NavBar = () => {
   const location = useLocation();
+  const { workingUser } = useUser();
+
+  const user = workingUser || getUserById(1);
+
+  if (!user) return null;
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -28,8 +35,10 @@ const NavBar = () => {
             <p>Create</p>
           </NavLink>
         </li>
-        <li className={`${styles['navbar-item']} ${isActive('/profile') ? styles.active : ''}`}>
-          <NavLink to="/profile" end>
+        <li
+          className={`${styles['navbar-item']} ${isActive(`/profile/${user.id}`) ? styles.active : ''}`}
+        >
+          <NavLink to={`/profile/${user.id}`} end>
             <FontAwesomeIcon icon={faUser} className={styles['navbar-icon']} />
             <p>Profile</p>
           </NavLink>

@@ -6,3 +6,7 @@ export { default as SubmitButton } from './SubmitButton/SubmitButton.jsx';
 export { default as DropdownField } from './DropdownField/DropdownField.jsx';
 export { default as SportLevelSelector } from './SportLevelSelector/SportLevelSelector.jsx';
 export { default as SecondaryHeader } from './Header/SecondaryHeader/SecondaryHeader.jsx';
+export { default as SearchBar } from './SearchBar/SearchBar.jsx';
+export { default as EventCard } from './EventCard/EventCard.jsx';
+
+export * from './EventDetails/index.js';
