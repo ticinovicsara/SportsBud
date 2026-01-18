@@ -2,7 +2,7 @@ import styles from './filterModal.module.css';
 import { SPORTS } from '../../data';
 import { useNavigate } from 'react-router-dom';
 
-const FilterModal = ({ filters, setFilters, onClose }) => {
+const FilterModal = ({ filters, setFilters, onClose, setFilterOpen }) => {
   const navigate = useNavigate();
 
   const handleApply = () => {
@@ -12,7 +12,9 @@ const FilterModal = ({ filters, setFilters, onClose }) => {
     if (filters.date) searchParams.set('date', filters.date);
 
     navigate(`/search?${searchParams.toString()}`);
+
     onClose();
+    if (setFilterOpen) setFilterOpen(false);
   };
 
   return (

@@ -7,13 +7,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const SearchBar = ({ query, setQuery, filterOpen, setFilterOpen }) => {
+const SearchBar = ({ query, setQuery }) => {
   const [filters, setFilters] = useState({
     dateRange: null,
     location: '',
     sportType: '',
     maxPlayers: null,
   });
+
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const navigate = useNavigate();
 

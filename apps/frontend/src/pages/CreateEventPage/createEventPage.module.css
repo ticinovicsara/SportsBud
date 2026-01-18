@@ -16,7 +16,7 @@
 }
 
 .event-title {
-  font-size: 1em;
+  font-size: 2em;
   font-weight: 700;
   color: #171717;
   margin-bottom: 30px;
@@ -115,9 +115,16 @@
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
 }
 
 .form-row {
@@ -242,11 +249,11 @@
   .form-row {
     flex-direction: column;
   }
-  
+
   .event-container {
     padding: 1.5em;
   }
-  
+
   .counter {
     padding: 0.75em;
   }

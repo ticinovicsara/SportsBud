@@ -30,11 +30,9 @@ const EditMyEventsPage = () => {
 
                   <p className={styles['event-location']}>📍 {event.location.name}</p>
                 </div>
-                <button className={styles['edit-event-button']}>
-                  <Link to={`/edit-event/${event.id}`} className={styles['edit-event-link']}>
-                    Edit
-                  </Link>
-                </button>
+                <Link to={`/edit-event/${event.id}`} className={styles['edit-event-link']}>
+                  <button className={styles['edit-event-button']}>Edit</button>
+                </Link>
               </div>
             </div>
           ))}
