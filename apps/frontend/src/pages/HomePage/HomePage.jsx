@@ -31,14 +31,16 @@ function HomePage() {
       <div className={styles['top-events-container']}>
         {topEvents.map((event) => (
           <div key={event.id} className={styles['top-card']}>
-            <h3 className={styles['title']}>{event.title}</h3>
-            <div className={styles['time-location']}>
-              <p className={styles['location']}>{event.location.name}</p>
-              <p className={styles['time']}>{event.startTime}</p>
-            </div>
-            <p className={styles['joined']}>
-              {event.currentPlayers}/{event.maxPlayers} players joined
-            </p>
+            <Link to={`/events/${event.id}`} className={styles['card-link']}>
+              <h3 className={styles['title']}>{event.title}</h3>
+              <div className={styles['time-location']}>
+                <p className={styles['location']}>{event.location.name}</p>
+                <p className={styles['time']}>{event.startTime}</p>
+              </div>
+              <p className={styles['joined']}>
+                {event.currentPlayers}/{event.maxPlayers} players joined
+              </p>
+            </Link>
           </div>
         ))}
       </div>
@@ -59,28 +61,33 @@ function HomePage() {
               const organiser = getUserById(event.organiserId);
               return (
                 <div key={event.id} className={styles['card']}>
-                  <h3 className={styles['title']}>{event.title}</h3>
-                  <div className={styles['time-location']}>
-                    <p className={styles['location']}>{event.location.name}</p>
-                    <p className={styles['time']}>
-                      {event.date}, {event.startTime}
+                  <Link to={`/events/${event.id}`} className={styles['card-link']}>
+                    <h3 className={styles['title']}>{event.title}</h3>
+                    <div className={styles['time-location']}>
+                      <p className={styles['location']}>{event.location.name}</p>
+                      <p className={styles['time']}>
+                        {event.date}, {event.startTime}
+                      </p>
+                    </div>
+                    <p className={styles['spots-left']}>
+                      {event.maxPlayers - event.currentPlayers} SPOTS LEFT
                     </p>
-                  </div>
-                  <p className={styles['spots-left']}>
-                    {event.maxPlayers - event.currentPlayers} SPOTS LEFT
-                  </p>
-                  <p className={styles['description']}>{event.description}</p>
+                    <p className={styles['description']}>{event.description}</p>
 
-                  <div className={styles['host']}>
-                    {organiser?.profileImage && (
-                      <img src={organiser.profileImage} alt="host" className={styles['avatar']} />
-                    )}
-                    <span>{organiser?.firstName}</span>
-                  </div>
+                    <div className={styles['host']}>
+                      {organiser?.profileImage && (
+                        <img src={organiser.profileImage} alt="host" className={styles['avatar']} />
+                      )}
+                      <span>{organiser?.firstName}</span>
+                    </div>
 
-                  <button className={styles['join-button']} onClick={() => handleJoin(event.title)}>
-                    Join
-                  </button>
+                    <button
+                      className={styles['join-button']}
+                      onClick={() => handleJoin(event.title)}
+                    >
+                      Join
+                    </button>
+                  </Link>
                 </div>
               );
             })}
