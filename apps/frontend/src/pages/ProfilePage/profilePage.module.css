@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .no-user {
@@ -15,13 +16,16 @@
 }
 
 .profile-container {
+  position: relative;
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
 .profile-header {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -66,7 +70,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
   box-sizing: border-box;
 }
 
@@ -82,14 +85,14 @@
   margin-bottom: 4px;
 }
 
-input,
+.input-group input,
 .input-group textarea {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   border-radius: 20px;
   border: 1px solid #e5e7eb;
   background-color: #f3f4f6;
-  box-sizing: border-box;
 }
 
 .add-sport {
@@ -150,4 +153,91 @@ input,
   justify-content: space-between;
   font-size: 0.875rem;
   color: #6b7280;
+}
+
+.edit-profile-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: #1f2937;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.edit-profile-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  width: 420px;
+  max-width: 92%;
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.modal h2 {
+  margin: 0 0 14px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.modal .input-group input,
+.modal .input-group textarea {
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: white;
+  color: #374151;
+}
+
+.cancel-btn:hover {
+  background: #f3f4f6;
+}
+
+.save-btn {
+  background: #22c55e;
+  color: white;
+  border: 1px solid #22c55e;
+}
+
+.save-btn:hover {
+  background: #16a34a;
 }
