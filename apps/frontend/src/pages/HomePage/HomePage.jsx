@@ -11,7 +11,7 @@ function HomePage() {
   const allEvents = getUpcomingEvents();
 
   const now = new Date();
-  const upcomingEvents = allEvents.filter(event => {
+  const upcomingEvents = allEvents.filter((event) => {
     const eventDateTime = new Date(`${event.date}T${event.startTime}`);
     return eventDateTime > now;
   });
@@ -28,9 +28,13 @@ function HomePage() {
         {topEvents.map((event) => (
           <div key={event.id} className={styles['top-card']}>
             <h3 className={styles['title']}>{event.title}</h3>
-            <p className={styles['time']}>{event.startTime}</p>
-            <p className={styles['location']}>{event.location.name}</p>
-            <p className={styles['joined']}>{event.currentPlayers}/{event.maxPlayers} players joined</p>
+            <div className={styles['time-location']}>
+              <p className={styles['location']}>{event.location.name}</p>
+              <p className={styles['time']}>{event.startTime}</p>
+            </div>
+            <p className={styles['joined']}>
+              {event.currentPlayers}/{event.maxPlayers} players joined
+            </p>
           </div>
         ))}
       </div>
@@ -41,7 +45,9 @@ function HomePage() {
           <div className={styles['upcoming-row']}>
             <h2 className={styles['upcoming-text']}>Upcoming Events</h2>
             <span className={styles['see-all']}>
-              <Link to="/events" className={styles['see-all-link']}>See All</Link>
+              <Link to="/events" className={styles['see-all-link']}>
+                See All
+              </Link>
             </span>
           </div>
 
@@ -51,8 +57,12 @@ function HomePage() {
               return (
                 <div key={event.id} className={styles['card']}>
                   <h3 className={styles['title']}>{event.title}</h3>
-                  <p className={styles['time']}>{event.date}, {event.startTime}</p>
-                  <p className={styles['location']}>{event.location.name}</p>
+                  <div className={styles['time-location']}>
+                    <p className={styles['location']}>{event.location.name}</p>
+                    <p className={styles['time']}>
+                      {event.date}, {event.startTime}
+                    </p>
+                  </div>
                   <p className={styles['spots-left']}>
                     {event.maxPlayers - event.currentPlayers} SPOTS LEFT
                   </p>
