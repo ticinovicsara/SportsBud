@@ -95,11 +95,10 @@ function HomePage() {
         </>
       )}
 
-      <button className={styles['edit-events-button']}>
-        <Link to="/edit-events" className={styles['edit-events-link']}>
-          {'Edit My Events'}
-        </Link>
-      </button>
+      <Link to="/edit-events" className={styles['edit-events-link']}>
+        {''}
+        <button className={styles['edit-events-button']}>Edit My Events</button>
+      </Link>
     </div>
   );
 }

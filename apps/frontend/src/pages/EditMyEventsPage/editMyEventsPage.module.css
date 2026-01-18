@@ -27,7 +27,6 @@
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
-  cursor: pointer;
 }
 
 .event-card:hover {
@@ -55,19 +54,23 @@
   margin: 6px 0;
 }
 
-.edit-event-button {
+.edit-event-link {
   width: 20%;
   padding: 1rem;
-  margin: rem 0;
+  text-align: center;
+  margin: 1rem 0;
   background-color: var(--color-primary-green);
   border: none;
   border-radius: 50px;
   cursor: pointer;
 }
 
-.edit-event-link {
+.edit-event-button {
+  background-color: var(--color-primary-green);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
   color: white;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
 }

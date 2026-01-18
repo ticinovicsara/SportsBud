@@ -28,16 +28,13 @@ const EditEventPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Učitaj podatke za event ID 1
   useEffect(() => {
     const event = EVENTS.find((e) => e.id === fallbackId);
 
     if (event) {
-      // Format datuma iz YYYY-MM-DD u MM/DD/YYYY
       const [year, month, day] = event.date.split('-');
       const formattedDate = `${month}/${day}/${year}`;
 
-      // Format vremena iz HH:MM u HH:MM AM/PM
       const formatTime = (timeStr) => {
         const [hours, minutes] = timeStr.split(':');
         const hour = parseInt(hours);
@@ -59,7 +56,6 @@ const EditEventPage = () => {
         description: event.description,
       });
 
-      // Učitaj usere (osim organizatora ID 1)
       const invitedUsers = event.participants
         .filter((p) => p.userId !== 1)
         .map((p) => USERS.find((u) => u.id === p.userId))
@@ -69,7 +65,6 @@ const EditEventPage = () => {
     }
   }, []);
 
-  // Validacije
   const isValidDate = (dateString) => {
     const regex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
     if (!regex.test(dateString)) return false;
@@ -176,9 +171,8 @@ const EditEventPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // User selection
   const filteredUsers = USERS.filter((user) => {
-    if (user.id === 1) return false; // Ne prikazuj organizatora
+    if (user.id === 1) return false;
     if (selectedUsers.find((u) => u.id === user.id)) return false;
 
     const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
@@ -238,11 +232,9 @@ const EditEventPage = () => {
     }
 
     try {
-      // Format datuma natrag u YYYY-MM-DD
       const [month, day, year] = formData.date.split('/');
       const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 
-      // Format vremena natrag u HH:MM
       const formatTimeTo24 = (timeStr) => {
         const [time, period] = timeStr.split(' ');
         let [hours, minutes] = time.split(':').map(Number);
@@ -256,10 +248,8 @@ const EditEventPage = () => {
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
       };
 
-      // Nađi event
       const eventIndex = EVENTS.findIndex((e) => e.id === fallbackId);
 
-      // Update event
       EVENTS[eventIndex] = {
         ...EVENTS[eventIndex],
         title: formData.eventTitle,
@@ -279,9 +269,7 @@ const EditEventPage = () => {
         ],
         description: formData.description,
         pointsAwarded: formData.points,
-        tags: formData.tags
-          ? formData.tags.split(',').map((tag) => tag.trim())
-          : [],
+        tags: formData.tags ? formData.tags.split(',').map((tag) => tag.trim()) : [],
       };
 
       toast.success('Event updated successfully!');
@@ -345,17 +333,13 @@ const EditEventPage = () => {
             <label className={styles['form-label']}>Date *</label>
             <input
               type="text"
-              className={`${styles['form-input']} ${
-                errors.date ? styles['input-error'] : ''
-              }`}
+              className={`${styles['form-input']} ${errors.date ? styles['input-error'] : ''}`}
               placeholder="MM/DD/YYYY"
               name="date"
               value={formData.date}
               onChange={handleInputChange}
             />
-            {errors.date && (
-              <span className={styles['error-message']}>{errors.date}</span>
-            )}
+            {errors.date && <span className={styles['error-message']}>{errors.date}</span>}
           </div>
 
           <div className={styles['form-row']}>
@@ -380,17 +364,13 @@ const EditEventPage = () => {
               <label className={styles['form-label']}>End Time *</label>
               <input
                 type="text"
-                className={`${styles['form-input']} ${
-                  errors.endTime ? styles['input-error'] : ''
-                }`}
+                className={`${styles['form-input']} ${errors.endTime ? styles['input-error'] : ''}`}
                 placeholder="12:00 PM"
                 name="endTime"
                 value={formData.endTime}
                 onChange={handleInputChange}
               />
-              {errors.endTime && (
-                <span className={styles['error-message']}>{errors.endTime}</span>
-              )}
+              {errors.endTime && <span className={styles['error-message']}>{errors.endTime}</span>}
             </div>
           </div>
 
@@ -398,17 +378,13 @@ const EditEventPage = () => {
             <label className={styles['form-label']}>Location *</label>
             <input
               type="text"
-              className={`${styles['form-input']} ${
-                errors.location ? styles['input-error'] : ''
-              }`}
+              className={`${styles['form-input']} ${errors.location ? styles['input-error'] : ''}`}
               placeholder="Enter location"
               name="location"
               value={formData.location}
               onChange={handleInputChange}
             />
-            {errors.location && (
-              <span className={styles['error-message']}>{errors.location}</span>
-            )}
+            {errors.location && <span className={styles['error-message']}>{errors.location}</span>}
           </div>
 
           <div className={styles['form-row']}>
@@ -455,9 +431,7 @@ const EditEventPage = () => {
                   +
                 </button>
               </div>
-              {errors.points && (
-                <span className={styles['error-message']}>{errors.points}</span>
-              )}
+              {errors.points && <span className={styles['error-message']}>{errors.points}</span>}
             </div>
           </div>
 
@@ -467,17 +441,13 @@ const EditEventPage = () => {
             </label>
             <input
               type="text"
-              className={`${styles['form-input']} ${
-                errors.tags ? styles['input-error'] : ''
-              }`}
+              className={`${styles['form-input']} ${errors.tags ? styles['input-error'] : ''}`}
               placeholder="Tags"
               name="tags"
               value={formData.tags}
               onChange={handleInputChange}
             />
-            {errors.tags && (
-              <span className={styles['error-message']}>{errors.tags}</span>
-            )}
+            {errors.tags && <span className={styles['error-message']}>{errors.tags}</span>}
           </div>
 
           <div className={styles['form-group']}>
@@ -512,9 +482,7 @@ const EditEventPage = () => {
                         <span className={styles['user-name']}>
                           {user.firstName} {user.lastName}
                         </span>
-                        <span className={styles['user-username']}>
-                          @{user.username}
-                        </span>
+                        <span className={styles['user-username']}>@{user.username}</span>
                       </div>
                     </div>
                   ))}
@@ -568,11 +536,7 @@ const EditEventPage = () => {
             <button type="submit" className={styles['btn-primary']}>
               Save Changes
             </button>
-            <button
-              type="button"
-              className={styles['btn-secondary']}
-              onClick={handleCancel}
-            >
+            <button type="button" className={styles['btn-secondary']} onClick={handleCancel}>
               Cancel
             </button>
           </div>
