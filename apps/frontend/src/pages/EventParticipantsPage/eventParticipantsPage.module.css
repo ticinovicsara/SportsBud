@@ -1,0 +1,67 @@
+.event-participants {
+  width: 100%;
+  background-color: var(--color-white);
+  border-radius: 20px;
+  padding: 1.5em;
+  border: 1px solid var(--font-color-gray);
+  margin-top: 1em;
+  box-sizing: border-box;
+}
+
+.event-participants h2 {
+  margin-bottom: 1em;
+}
+
+.participants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.participant-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  border-radius: 12px;
+  border: 1px solid var(--font-color-gray);
+  background-color: var(--color-white);
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.participant-card p {
+  flex: 1;
+  margin-left: 1em;
+  font-weight: 600;
+}
+
+.participant-card span {
+  margin-right: 1em;
+  font-size: 0.9rem;
+  color: var(--font-color-gray);
+}
+
+.participant-card a {
+  color: var(--color-primary-green);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.participant-card a:hover {
+  text-decoration: underline;
+}
