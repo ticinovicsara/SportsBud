@@ -6,7 +6,7 @@ const EventParticipantsPage = (eventId) => {
 
   return (
     <div>
-      <h1>Event Participants</h1>
+      <h1>Event Participant</h1>
     </div>
   );
 };
