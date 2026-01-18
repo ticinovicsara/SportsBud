@@ -35,7 +35,7 @@ function EventDetailsPage() {
 
         <EventDescriptionCard event={event} />
 
-        <EventOrganizerCard organizerId={event.creatorId} />
+        <EventOrganizerCard organizerId={event.organiserId} />
 
         <EventParticipantsCard participants={event.participants} maxPlayers={event.maxPlayers} />
       </div>

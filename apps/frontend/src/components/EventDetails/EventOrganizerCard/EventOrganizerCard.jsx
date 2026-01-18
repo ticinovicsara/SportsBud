@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 const EventOrganizerCard = ({ organizerId }) => {
   const organizer = getUserById(organizerId);
-  console.log(organizer);
 
   if (!organizer) return <p>Organizer not found.</p>;
 

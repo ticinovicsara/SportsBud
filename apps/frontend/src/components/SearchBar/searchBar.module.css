@@ -6,6 +6,7 @@
   border-radius: 999px;
   background: var(--input-background);
   box-sizing: border-box;
+  margin-bottom: 1em;
 }
 
 .filterBtn {
