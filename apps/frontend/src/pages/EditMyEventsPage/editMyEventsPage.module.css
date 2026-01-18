@@ -14,12 +14,12 @@
 }
 
 .events-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  display: flex;
   gap: 1rem;
 }
 
 .event-card {
+  width: 100%;
   background: #ffffff;
   border-radius: 12px;
   padding: 20px;
