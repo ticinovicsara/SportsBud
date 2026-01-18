@@ -8,3 +8,5 @@ export { default as NotFoundPage } from './NotFoundPage/NotFoundPage.jsx';
 export { default as EventsPage } from './EventsPage/EventsPage.jsx';
 export { default as SearchResultsPage } from './SearchResultsPage/SearchResultsPage.jsx';
 export { default as EventParticipantsPage } from './EventParticipantsPage/EventParticipantsPage.jsx';
+export { default as EditMyEventsPage } from './EditMyEventsPage/EditMyEventsPage.jsx';
+export { default as EditEventPage } from './EditMyEventsPage/EditEventPage/EditEventPage.jsx';
