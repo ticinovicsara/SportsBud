@@ -162,7 +162,6 @@
   
 
 
-  /* --- Edit profile button (usklađeno s dizajnom) --- */
 .edit-profile-btn {
   position: absolute;
   top: 24px;
@@ -181,7 +180,6 @@
   background-color: #f3f4f6;
 }
 
-/* --- Modal overlay (dark transparent layer) --- */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -192,7 +190,6 @@
   z-index: 1000;
 }
 
-/* --- Modal box (usklađeno s karticama) --- */
 .modal {
   width: 420px;
   max-width: 92%;
@@ -203,14 +200,12 @@
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-/* --- Modal naslov --- */
 .modal h2 {
   margin: 0 0 14px 0;
   font-size: 1.25rem;
   font-weight: 700;
 }
 
-/* --- Modal input izgled (isti kao u profilu) --- */
 .modal .input-group input,
 .modal .input-group textarea {
   background-color: #f3f4f6;
@@ -219,7 +214,6 @@
   padding: 12px;
 }
 
-/* --- Gumbi na dnu modal prozora --- */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
