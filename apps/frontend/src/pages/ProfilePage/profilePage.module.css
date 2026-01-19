@@ -62,6 +62,21 @@
   color: #6b7280;
 }
 
+.profile-friends-link {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.profile-friends-link:hover {
+  color: #22c55e;
+  background-color: #f0fdf4;
+}
+
 .profile-section {
   padding: 16px;
   border-radius: 24px;
@@ -253,4 +268,96 @@
   font-size: 16px;
   font-weight: 600;
   color: white;
+}
+
+/* Add Friend Buttons */
+.add-friend-btn,
+.friend-pending-btn,
+.friend-status-btn {
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+.add-friend-btn {
+  background-color: #22c55e;
+  color: white;
+  border: 1px solid #22c55e;
+}
+
+.add-friend-btn:hover {
+  background-color: #16a34a;
+}
+
+.friend-pending-btn {
+  background-color: #fbbf24;
+  color: white;
+  border: 1px solid #fbbf24;
+}
+
+.friend-pending-btn:hover {
+  background-color: #f59e0b;
+}
+
+.friend-status-btn {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  cursor: default;
+}
+
+.friend-status-btn:hover {
+  background-color: #f3f4f6;
+}
+
+/* Friends Grid on Profile */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.friend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.friend-item:hover {
+  background-color: #f0fdf4;
+  border-color: #22c55e;
+  transform: translateY(-2px);
+}
+
+.friend-item-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.friend-item-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #171717;
+  text-align: center;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
