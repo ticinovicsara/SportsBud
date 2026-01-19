@@ -1,18 +1,34 @@
 import styles from './profilePage.module.css';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 import { getUserById } from '../../data/dataHelper';
-
+import { useNavigate } from 'react-router-dom';
 import SportLevelSelector from '../../components/SportLevelSelector/SportLevelSelector';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function ProfileScreen({ user }) {
+function ProfileScreen({ user, canEdit }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentUser, setCurrentUser] = useState({ ...user });
   const [editedUser, setEditedUser] = useState({ ...user });
+  const navigate = useNavigate();
 
   if (!user) return <p className={styles['no-user']}>Korisnik nije pronađen!</p>;
+
+  const { logout } = useUser();
+
+  useEffect(() => {
+    setCurrentUser({ ...user });
+    setEditedUser({ ...user });
+    setIsEditing(false);
+  }, [user]);
+
+  const handleLogout = () => {
+    logout();
+    toast.info('Logged out');
+    navigate('/login');
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,9 +50,11 @@ function ProfileScreen({ user }) {
   return (
     <div className={styles['profile-container']}>
       <div className={styles['profile-header']}>
-        <button className={styles['edit-profile-btn']} onClick={() => setIsEditing(true)}>
-          Edit profile
-        </button>
+        {canEdit && (
+          <button className={styles['edit-profile-btn']} onClick={() => setIsEditing(true)}>
+            Edit profile
+          </button>
+        )}
 
         <div className={styles['profile-image-wrapper']}>
           <img
@@ -140,7 +158,7 @@ function ProfileScreen({ user }) {
         )}
       </div>
 
-      {isEditing && (
+      {canEdit && isEditing && (
         <div className={styles['profile-actions']}>
           <button className={styles['cancel-btn']} onClick={handleCancel}>
             Odustani
@@ -150,19 +168,33 @@ function ProfileScreen({ user }) {
           </button>
         </div>
       )}
+
+      <button className={styles['logout-button']} onClick={handleLogout} replace={true}>
+        Logout
+      </button>
     </div>
   );
 }
 
 function ProfilePage() {
   const { id } = useParams();
-  const user = getUserById(Number(id));
+  const loggedInUser = useUser();
+  const profileUser = getUserById(Number(id));
 
-  if (!user) return <p className={styles['no-user']}>Korisnik nije pronađen.</p>;
+  if (!profileUser) return <p className={styles['no-user']}>Korisnik nije pronađen.</p>;
+  if (!loggedInUser)
+    return <p className={styles['no-user']}>Molimo prijavite se za pregled profila.</p>;
+
+  const isOwner = loggedInUser.user.id === profileUser.id;
+
+  console.log('Rendering ProfilePage for user ID:', id, 'Is owner:', isOwner);
+
+  console.log('loggedInUser:', loggedInUser);
+  console.log('profileUser:', profileUser);
 
   return (
     <div className={styles['profile-page']}>
-      <ProfileScreen user={user} />
+      <ProfileScreen user={profileUser} canEdit={isOwner} />
       <ToastContainer />
     </div>
   );

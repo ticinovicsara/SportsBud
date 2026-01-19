@@ -13,5 +13,10 @@ export const UserProvider = ({ children }) => {
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
-export const useUser = () => useContext(UserContext);
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) throw new Error('useUser must be used within a UserProvider');
 
+  console.log('Current user in context:', context.user);
+  return context;
+};

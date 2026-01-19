@@ -1,21 +1,14 @@
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 
-function ProtectedRoute({ children }) {
+export default function ProtectedRoute() {
   const { user } = useUser();
 
-  console.log(`ProtectedRoute - user: ${user}`);
+  console.log('ProtectedRoute - user:', user);
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <Outlet />;
 }
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default ProtectedRoute;

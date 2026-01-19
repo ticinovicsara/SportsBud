@@ -13,12 +13,17 @@ import {
   EditMyEventsPage,
   EditEventPage,
 } from '../pages/index.js';
+import { ProtectedRoute } from '../components/index.js';
 import { useUser } from '../context/UserContext.jsx';
 import { MainLayout, AuthLayout } from '../layouts/index.js';
-//import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute.jsx';
 
 export default function AppRoutes() {
   const { user } = useUser();
+  if (user) {
+    console.log('User is logged in with ID:', user.id);
+  } else {
+    console.log('No user logged in yet');
+  }
 
   return (
     <Routes>
@@ -27,18 +32,18 @@ export default function AppRoutes() {
         <Route path="/register" element={user ? <Navigate to="/" replace /> : <RegisterPage />} />
       </Route>
 
-      {/* add for later <ProtectedRoute> <MainLayout /> </ProtectedRoute>{' '}*/}
-
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/create-event" element={<CreateEventPage />} />
-        <Route path="/events" element={<EventsPage />} />
-        <Route path="/edit-events" element={<EditMyEventsPage />} />
-        <Route path="/edit-event/:id" element={<EditEventPage />} />
-        <Route path="/profile/:id" element={<ProfilePage />} />
-        <Route path="/events/:id" element={<EventDetailsPage />} />
-        <Route path="/search" element={<SearchResultsPage />} />
-        <Route path="/events/:id/participants" element={<EventParticipantsPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/create-event" element={<CreateEventPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/edit-events" element={<EditMyEventsPage />} />
+          <Route path="/edit-event/:id" element={<EditEventPage />} />
+          <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/events/:id" element={<EventDetailsPage />} />
+          <Route path="/search" element={<SearchResultsPage />} />
+          <Route path="/events/:id/participants" element={<EventParticipantsPage />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
