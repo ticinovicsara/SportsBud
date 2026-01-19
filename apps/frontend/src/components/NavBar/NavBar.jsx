@@ -8,9 +8,9 @@ import { getUserById } from '../../data/dataHelper';
 
 const NavBar = () => {
   const location = useLocation();
-  const { workingUser } = useUser();
+  const { user: loggedInUser } = useUser();
 
-  const user = workingUser || getUserById(1);
+  const user = loggedInUser || getUserById(1);
 
   if (!user) return null;
 
@@ -38,7 +38,7 @@ const NavBar = () => {
         <li
           className={`${styles['navbar-item']} ${isActive(`/profile/${user.id}`) ? styles.active : ''}`}
         >
-          <NavLink to={`/profile/${user.id}`} end>
+          <NavLink to={`/profile/${loggedInUser.id}`} end>
             <FontAwesomeIcon icon={faUser} className={styles['navbar-icon']} />
             <p>Profile</p>
           </NavLink>
