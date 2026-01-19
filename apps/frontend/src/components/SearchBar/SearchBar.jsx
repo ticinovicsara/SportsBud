@@ -16,7 +16,6 @@ const SearchBar = ({ query, setQuery }) => {
   });
 
   const [filterOpen, setFilterOpen] = useState(false);
-
   const navigate = useNavigate();
 
   const handleSearch = () => {
