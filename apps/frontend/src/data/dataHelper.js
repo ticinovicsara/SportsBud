@@ -18,6 +18,11 @@ export function getAllEvents() {
   return [...EVENTS, ...localEvents];
 }
 
+export const getAllUsers = () => {
+  const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
+  return [...USERS, ...localUsers];
+};
+
 export const getTodaysEvents = () => {
   const today = new Date().toISOString().split('T')[0];
   return EVENTS.filter((event) => event.date === today && event.status === 'upcoming');
